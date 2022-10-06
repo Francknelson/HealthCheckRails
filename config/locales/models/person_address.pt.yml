@@ -1,0 +1,19 @@
+pt:
+  activerecord:
+    models:
+      person_address:
+        one: Endereço
+        other: Endereços
+    attributes:
+      person_address:
+        zipcode: CEP
+        street: Rua
+        number: Número
+        complement: Complemento
+        neighborhood: Bairro
+        city: Cidade
+        state: Estado
+        person: Pessoa
+        person_id: Pessoa
+        created_at: Cadastrado em
+        updated_at: Atualizado em

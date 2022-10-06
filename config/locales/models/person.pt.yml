@@ -1,0 +1,22 @@
+pt:
+  activerecord:
+    models:
+      person:
+        one: Usuário
+        other: Usuários
+    attributes:
+      person:
+        name: Nome
+        last_name: Sobrenome
+        user: Usuário
+        password: Senha
+        password_confirmation: Confirmação de senha
+        cpf: CPF
+        rg: RG
+        email: Email
+        phone: Telefone
+        address: Endereço
+        address_id: Endereço
+        addresses: Endereços
+        created_at: Cadastrado em
+        updated_at: Atualizado em

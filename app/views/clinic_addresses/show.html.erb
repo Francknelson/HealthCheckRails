@@ -1,0 +1,24 @@
+<h1><%= ClinicAddress.model_name.human %></h1>
+
+<div class="row">
+  <div class="col-3"><%= ClinicAddress.human_attribute_name :zipcode %></div>
+  <div class="col-9"><%= @clinic_address.zipcode %></div>
+  <div class="col-3"><%= ClinicAddress.human_attribute_name :street %></div>
+  <div class="col-9"><%= @clinic_address.street %></div>
+  <div class="col-3"><%= ClinicAddress.human_attribute_name :number %></div>
+  <div class="col-9"><%= @clinic_address.number %></div>
+  <div class="col-3"><%= ClinicAddress.human_attribute_name :neighborhood %></div>
+  <div class="col-9"><%= @clinic_address.neighborhood %></div>
+  <div class="col-3"><%= ClinicAddress.human_attribute_name :city %></div>
+  <div class="col-9"><%= @clinic_address.city %></div>
+  <div class="col-3"><%= ClinicAddress.human_attribute_name :state %></div>
+  <div class="col-9"><%= @clinic_address.state %></div>
+  <div class="col-3"><%= ClinicAddress.human_attribute_name :complement %></div>
+  <div class="col-9"><%= @clinic_address.complement %></div>
+</div>
+
+<div class="page-actions">
+  <%= link_to "Editar", edit_clinic_clinic_address_path(@clinic, @clinic_address), class: "btn btn-primary" %>
+  <%= link_to "Deletar", clinic_clinic_address_path(@clinic, @clinic_address), class: "btn btn-danger" %>
+  <%= link_to "Voltar", clinic_path(@clinic), class: "btn btn-secondary" %>
+</div>

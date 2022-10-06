@@ -1,5 +1,8 @@
 class ProfessionalsController < ApplicationController
   before_action :set_professional, only: %i[ show edit update destroy ]
+  before_action :set_people, only: %i[ new create edit update ]
+  before_action :set_specialties, only: %i[ new create edit update ]
+  before_action :set_clinic, only: %i[ new create update edit ]
 
   # GET /professionals or /professionals.json
   def index
@@ -25,7 +28,7 @@ class ProfessionalsController < ApplicationController
 
     respond_to do |format|
       if @professional.save
-        format.html { redirect_to professional_url(@professional), notice: "Professional was successfully created." }
+        format.html { redirect_to professional_url(@professional), notice: "Profissional criado com sucesso!" }
         format.json { render :show, status: :created, location: @professional }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +41,7 @@ class ProfessionalsController < ApplicationController
   def update
     respond_to do |format|
       if @professional.update(professional_params)
-        format.html { redirect_to professional_url(@professional), notice: "Professional was successfully updated." }
+        format.html { redirect_to professional_url(@professional), notice: "Profissional atualizado com sucesso!" }
         format.json { render :show, status: :ok, location: @professional }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +55,32 @@ class ProfessionalsController < ApplicationController
     @professional.destroy
 
     respond_to do |format|
-      format.html { redirect_to professionals_url, notice: "Professional was successfully destroyed." }
+      format.html { redirect_to professionals_url, notice: "Profissional excluído com sucesso!" }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_professional
-      @professional = Professional.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def professional_params
-      params.fetch(:professional, {})
-    end
+  def set_clinic
+    @clinics = Clinic.all
+  end
+
+  def set_people
+    @people = Person.all
+  end
+
+  def set_specialties
+    @specialties = Specialty.all
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_professional
+    @professional = Professional.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def professional_params
+    params.require(:professional).permit(:person_id, :cnpj, :professional_record, :specialty_id, :clinic_id)
+  end
 end

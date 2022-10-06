@@ -1,0 +1,7 @@
+pt:
+  doctors_appointments:
+    index:
+      doctors_appointments_count_html:
+        zero: Não temos consultas cadastradas.
+        one: "Hoje temos <b>%{count}</b> consulta cadastrada."
+        other: "Hoje temos <b>%{count}</b> consultas cadastradas."

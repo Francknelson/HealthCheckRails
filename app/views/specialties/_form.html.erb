@@ -1,17 +1,25 @@
-<%= form_with(model: specialty) do |form| %>
-  <% if specialty.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(specialty.errors.count, "error") %> prohibited this specialty from being saved:</h2>
+<%
+  form_url = specialty.persisted? ? specialty_path(specialty) : specialties_path
+%>
 
-      <ul>
-        <% specialty.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<p class="text-muted"><%= t "required_fields_html" %></p>
+
+<%= simple_form_for(specialty, url: form_url, local: true) do |f| %>
+
+  <fieldset class="form-fields">
+    <div class="form-floating mb-3">
+      <%= f.input_field :description, class: "form-control", placeholder: "Descrição" %>
+      <%= f.label :description %>
     </div>
-  <% end %>
+  </fieldset>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-actions">
+    <% if specialty.new_record? %>
+      <%= f.submit "Cadastrar", class: "btn btn-primary" %>
+      <%= link_to "Voltar", specialties_path, class: "btn btn-secondary" %>
+    <% else %>
+      <%= f.submit "Salvar", class: "btn btn-primary" %>
+      <%= link_to "Voltar", specialty_path(specialty), class: "btn btn-secondary" %>
+    <% end %>
   </div>
 <% end %>

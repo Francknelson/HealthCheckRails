@@ -1,5 +1,6 @@
 class ClinicsController < ApplicationController
   before_action :set_clinic, only: %i[ show edit update destroy ]
+  before_action :set_specialties, only: %i[ new create ]
 
   # GET /clinics or /clinics.json
   def index
@@ -25,7 +26,7 @@ class ClinicsController < ApplicationController
 
     respond_to do |format|
       if @clinic.save
-        format.html { redirect_to clinic_url(@clinic), notice: "Clinic was successfully created." }
+        format.html { redirect_to clinic_url(@clinic), notice: "Clínica criada com sucesso!" }
         format.json { render :show, status: :created, location: @clinic }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class ClinicsController < ApplicationController
   def update
     respond_to do |format|
       if @clinic.update(clinic_params)
-        format.html { redirect_to clinic_url(@clinic), notice: "Clinic was successfully updated." }
+        format.html { redirect_to clinic_url(@clinic), notice: "Clínica atualizada com sucesso!" }
         format.json { render :show, status: :ok, location: @clinic }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +53,24 @@ class ClinicsController < ApplicationController
     @clinic.destroy
 
     respond_to do |format|
-      format.html { redirect_to clinics_url, notice: "Clinic was successfully destroyed." }
+      format.html { redirect_to clinics_url, notice: "Clínica excluída com sucesso!" }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_clinic
-      @clinic = Clinic.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def clinic_params
-      params.fetch(:clinic, {})
-    end
+  def set_specialties
+    @specialties = Specialty.all
+  end
+
+    # Use callbacks to share common setup or constraints between actions.
+  def set_clinic
+    @clinic = Clinic.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def clinic_params
+    params.require(:clinic).permit(:corporate_name, :cnpj, :address, :phone, :email, :specialty_id)
+  end
 end

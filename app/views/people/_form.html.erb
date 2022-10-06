@@ -1,17 +1,66 @@
-<%= form_with(model: person) do |form| %>
-  <% if person.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
+<%
+  form_url = person.persisted? ? person_path(person) : people_path
+%>
 
-      <ul>
-        <% person.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<p class="text-muted"><%= t "required_fields_html" %></p>
+
+<%= simple_form_for(person, url: form_url, local: true) do |f| %>
+
+  <fieldset class="form-fields">
+    <div class="form-floating mb-3">
+      <%= f.input_field :name, class: "form-control", placeholder: "Nome" %>
+      <%= f.label :name %>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.submit %>
+    <div class="form-floating mb-3">
+      <%= f.input_field :last_name, class: "form-control", placeholder: "Sobrenome" %>
+      <%= f.label :last_name %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :cpf, class: "form-control", placeholder: "CPF" %>
+      <%= f.label :cpf %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :rg, class: "form-control", placeholder: "RG" %>
+      <%= f.label :rg %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :email, class: "form-control", placeholder: "E-mail" %>
+      <%= f.label :email %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :phone, class: "form-control", placeholder: "Telefone" %>
+      <%= f.label :phone %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :user, class: "form-control", placeholder: "Usuário" %>
+      <%= f.label :user %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.password_field :password, class: "form-control", placeholder: "Senha" %>
+      <%= f.label :password %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirme a senha" %>
+      <%= f.label :password_confirmation %>
+    </div>
+  </fieldset>
+
+  <div class="form-actions">
+
+    <% if person.new_record? %>
+      <%= f.submit "Cadastrar", class: "btn btn-primary" %>
+      <%= link_to "Voltar", signin_path, class: "btn btn-secondary" %>
+    <% else %>
+      <%= f.submit "Salvar", class: "btn btn-primary" %>
+      <%= link_to "Voltar", person_path(person), class: "btn btn-secondary" %>
+    <% end %>
   </div>
 <% end %>

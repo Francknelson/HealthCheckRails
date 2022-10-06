@@ -1,0 +1,18 @@
+pt:
+  activerecord:
+    models:
+      appointment:
+        one: Consulta
+        other: Consultas
+    attributes:
+      appointment:
+        professional: Profissional
+        professional_id: Profissional
+        clinic: Clínica
+        clinic_id: Clínica
+        appointment_date: Data da Consulta
+        return: Retorno
+        true: Sim
+        false: Não
+        created_at: Cadastrado em
+        updated_at: Atualizado em

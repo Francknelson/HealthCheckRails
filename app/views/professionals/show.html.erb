@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<h1><%= Professional.model_name.human %></h1>
 
-<%= render @professional %>
+<div class="row">
+  <div class="col-3"><%= Professional.human_attribute_name :name %></div>
+  <div class="col-9"><%= @professional.person.name %></div>
+  <div class="col-3"><%= Professional.human_attribute_name :last_name %></div>
+  <div class="col-9"><%= @professional.person.last_name %></div>
+  <div class="col-3"><%= Professional.human_attribute_name :cnpj %></div>
+  <div class="col-9"><%= @professional.cnpj %></div>
+  <div class="col-3"><%= Professional.human_attribute_name :email %></div>
+  <div class="col-9"><%= @professional.person.email %></div>
+  <div class="col-3"><%= Professional.human_attribute_name :professional_record %></div>
+  <div class="col-9"><%= @professional.professional_record %></div>
+  <div class="col-3"><%= Professional.human_attribute_name :specialty %></div>
+  <div class="col-9"><%= @professional.specialty.description %></div>
+</div>
 
-<div>
-  <%= link_to "Edit this professional", edit_professional_path(@professional) %> |
-  <%= link_to "Back to professionals", professionals_path %>
-
-  <%= button_to "Destroy this professional", @professional, method: :delete %>
+<div class="page-actions">
+  <%= link_to "Editar", edit_professional_path(@professional), class: "btn btn-primary" %>
+  <%= link_to "Deletar", professional_path(@professional), class: "btn btn-danger", method: :delete %>
+  <%= link_to "Voltar", professionals_path, class: "btn btn-secondary" %>
 </div>

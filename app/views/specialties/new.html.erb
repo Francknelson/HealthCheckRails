@@ -1,9 +1,3 @@
-<h1>New specialty</h1>
+<h1><%= t "title.new", model_name: Specialty.model_name.human %></h1>
 
 <%= render "form", specialty: @specialty %>
-
-<br>
-
-<div>
-  <%= link_to "Back to specialties", specialties_path %>
-</div>

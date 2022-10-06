@@ -1,17 +1,45 @@
-<%= form_with(model: clinic) do |form| %>
-  <% if clinic.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(clinic.errors.count, "error") %> prohibited this clinic from being saved:</h2>
+<%
+  form_url = clinic.persisted? ? clinic_path(clinic) : clinics_path
+%>
 
-      <ul>
-        <% clinic.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<p class="text-muted"><%= t "required_fields_html" %></p>
+
+<%= simple_form_for(clinic, url: form_url, local: true) do |f| %>
+
+  <fieldset class="form-fields">
+    <div class="form-floating mb-3">
+      <%= f.input_field :corporate_name, class: "form-control", placeholder: "Razão Social" %>
+      <%= f.label :corporate_name %>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.submit %>
+    <div class="form-floating mb-3">
+      <%= f.input_field :cnpj, class: "form-control", placeholder: "CNPJ" %>
+      <%= f.label :cnpj %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :specialty_id,
+                        as: :select,
+                        collection: @specialties.map{ |s| %W[#{s.description} #{s.id}]},
+                        label: false,
+                        prompt: "Especialidade",
+                        class: "form-select" %>
+      <%= f.label :specialty_id  %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :health_insurance, class: "form-control", placeholder: "Plano de saúde" %>
+      <%= f.label :health_insurance %>
+    </div>
+  </fieldset>
+
+  <div class="form-actions">
+    <% if clinic.new_record? %>
+      <%= f.submit "Adicionar Clínica", class: "btn btn-primary" %>
+      <%= link_to "Voltar", clinics_path, class: "btn btn-secondary" %>
+    <% else %>
+      <%= f.submit "Atualizar Clínica", class: "btn btn-primary" %>
+      <%= link_to "Voltar", clinic_path(clinic), class: "btn btn-secondary"  %>
+    <% end %>
   </div>
 <% end %>

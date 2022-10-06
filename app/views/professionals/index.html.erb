@@ -1,14 +1,63 @@
-<p style="color: green"><%= notice %></p>
+<div class="row">
+  <div class="col-md-8">
+    <h1><%= Professional.model_name.human count: 2 %></h1>
 
-<h1>Professionals</h1>
+    <p><%= t ".professionals_count_html", count: @professionals.size %></p>
+  </div>
 
-<div id="professionals">
-  <% @professionals.each do |professional| %>
-    <%= render professional %>
-    <p>
-      <%= link_to "Show this professional", professional %>
-    </p>
-  <% end %>
+  <div class="col-md-4 text-md-right d-print-none">
+    <%= link_to "Novo professional", new_professional_path, class: "btn btn-primary" %>
+  </div>
 </div>
 
-<%= link_to "New professional", new_professional_path %>
+<% if @professionals.any? %>
+  <% @professionals.each do |professional| %>
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="https://cdn-icons-png.flaticon.com/512/1198/1198344.png" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= professional.person.name %> <%= professional.person.last_name %></h5>
+            <p class="card-text">
+              <span class="row">
+                <span class="col">
+                  <%= Professional.human_attribute_name :email %>: <%= professional.person.email %>
+                </span>
+              </span>
+
+              <span class="row">
+                <span class="col">
+                  <%= Professional.human_attribute_name :cnpj %>: <%= professional.cnpj %>
+                </span>
+              </span>
+
+              <span class="row">
+                <span class="col">
+                  <%= Professional.human_attribute_name :professional_record %>: <%= professional.professional_record %>
+                </span>
+              </span>
+
+              <span class="row">
+                <span class="col">
+                  <%= Professional.human_attribute_name :specialty %>: <%= professional.specialty.description %>
+                </span>
+              </span>
+            </p>
+            <p class="card-text"><small class="text-muted">
+              <%= Professional.human_attribute_name :updated_at %>: <%= professional.updated_at %>
+            </small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+<% else %>
+  <p class="lead">
+    <%= link_to new_professional_path do %>
+      <%= t "create_your_first_model", model_name: Professional.model_name.human %>
+    <% end %>
+  </p>
+<% end %>

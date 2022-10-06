@@ -1,10 +1,3 @@
-<h1>Editing clinic</h1>
+<h1><%= t "title.edit", model_name: Clinic.model_name.human %></h1>
 
 <%= render "form", clinic: @clinic %>
-
-<br>
-
-<div>
-  <%= link_to "Show this clinic", @clinic %> |
-  <%= link_to "Back to clinics", clinics_path %>
-</div>

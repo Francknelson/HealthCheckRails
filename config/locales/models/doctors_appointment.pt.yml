@@ -1,0 +1,16 @@
+pt:
+  activerecord:
+    models:
+      doctors_appointment:
+        one: Consulta
+        other: Consultas
+    attributes:
+      doctors_appointment:
+        appointment_date: Data da Consulta
+        return: Retorno
+        professional_id: Doutor
+        professional: Doutor
+        clinic_id: Clínica
+        clinic: Clínica
+        created_at: Cadastrado em
+        updated_at: Atualizado em

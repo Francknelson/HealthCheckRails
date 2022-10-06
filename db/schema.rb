@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_30_131739) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_05_064552) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,26 +22,27 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_131739) do
     t.string "neighborhood", null: false
     t.string "city", null: false
     t.string "state", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-  end
-
-  create_table "clinics", force: :cascade do |t|
-    t.date "corporate_name", null: false
-    t.boolean "cnpj", null: false
-    t.string "health_insurance", null: false
-    t.bigint "professional_id", null: false
-    t.bigint "specialty_id", null: false
+    t.bigint "person_id"
+    t.bigint "clinic_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "doctors_appointments", force: :cascade do |t|
+  create_table "appointments", force: :cascade do |t|
     t.date "appointment_date", null: false
     t.boolean "return", null: false
     t.string "status", null: false
     t.bigint "professional_id", null: false
     t.bigint "clinic_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "clinics", force: :cascade do |t|
+    t.string "corporate_name", null: false
+    t.string "cnpj", null: false
+    t.string "health_insurance"
+    t.bigint "specialty_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -54,9 +55,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_131739) do
     t.string "email", null: false
     t.string "phone"
     t.string "user", null: false
-    t.string "password", null: false
+    t.string "password_hash", null: false
+    t.string "password_salt", null: false
     t.date "birth_date"
-    t.bigint "address_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -66,6 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_131739) do
     t.string "professional_record", null: false
     t.bigint "person_id", null: false
     t.bigint "specialty_id", null: false
+    t.bigint "clinic_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -76,11 +78,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_131739) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "clinics", "professionals", name: "clinics_professional_id_fkey"
+  add_foreign_key "addresses", "clinics", name: "addresses_clinic_id_fkey"
+  add_foreign_key "addresses", "people", name: "addresses_person_id_fkey"
+  add_foreign_key "appointments", "clinics", name: "appointments_clinic_id_fkey"
+  add_foreign_key "appointments", "professionals", name: "appointments_professional_id_fkey"
   add_foreign_key "clinics", "specialties", name: "clinics_specialty_id_fkey"
-  add_foreign_key "doctors_appointments", "clinics", name: "doctors_appointments_clinic_id_fkey"
-  add_foreign_key "doctors_appointments", "professionals", name: "doctors_appointments_professional_id_fkey"
-  add_foreign_key "people", "addresses", name: "people_address_id_fkey"
+  add_foreign_key "professionals", "clinics", name: "professionals_clinic_id_fkey"
   add_foreign_key "professionals", "people", name: "professionals_person_id_fkey"
   add_foreign_key "professionals", "specialties", name: "professionals_specialty_id_fkey"
 end

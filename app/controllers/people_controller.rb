@@ -25,11 +25,10 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
-        format.html { redirect_to person_url(@person), notice: "Person was successfully created." }
-        format.json { render :show, status: :created, location: @person }
+        format.html { redirect_to "/", notice: "Usuário cadastrado com sucesso!" }
+        session[:user_id] = @person.id
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @person.errors, status: :unprocessable_entity }
+        format.html { redirect_to signup_path, notice: "Usuário não pode ser cadastrado." }
       end
     end
   end
@@ -38,7 +37,7 @@ class PeopleController < ApplicationController
   def update
     respond_to do |format|
       if @person.update(person_params)
-        format.html { redirect_to person_url(@person), notice: "Person was successfully updated." }
+        format.html { redirect_to person_url(@person), notice: "Usuário atualizado com sucesso!" }
         format.json { render :show, status: :ok, location: @person }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +51,7 @@ class PeopleController < ApplicationController
     @person.destroy
 
     respond_to do |format|
-      format.html { redirect_to people_url, notice: "Person was successfully destroyed." }
+      format.html { redirect_to people_url, notice: "Usuário excluído com sucesso!" }
       format.json { head :no_content }
     end
   end
@@ -65,6 +64,6 @@ class PeopleController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def person_params
-      params.fetch(:person, {})
+      params.require(:person).permit(:name, :last_name, :cpf, :user, :email, :password, :password_confirmation, :rg, :phone)
     end
 end

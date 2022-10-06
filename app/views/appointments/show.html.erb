@@ -1,0 +1,20 @@
+<h1><%= Appointment.model_name.human %></h1>
+
+<div class="row">
+  <div class="col-3"><%= Appointment.human_attribute_name :professional %></div>
+  <div class="col-9"><%= @appointment.professional.person.name %></div>
+  <div class="col-3"><%= Appointment.human_attribute_name :clinic %></div>
+  <div class="col-9"><%= @appointment.clinic.corporate_name %></div>
+  <div class="col-3"><%= Appointment.human_attribute_name :appointment_date %></div>
+  <div class="col-9"><%= @appointment.appointment_date %></div>
+  <div class="col-3"><%= Appointment.human_attribute_name :return %></div>
+  <div class="col-9"><%= @appointment.return %></div>
+  <div class="col-3"><%= Appointment.human_attribute_name :status %></div>
+  <div class="col-9"><%= @appointment.status %></div>
+</div>
+
+<div class="page-actions">
+  <%= link_to "Editar", edit_appointment_path(@appointment), class: "btn btn-primary" %>
+  <%= link_to "Deletar", appointment_path(@appointment), class: "btn btn-danger", method: :delete %>
+  <%= link_to "Voltar", appointments_path, class: "btn btn-secondary" %>
+</div>

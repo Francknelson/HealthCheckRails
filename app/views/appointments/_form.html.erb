@@ -1,0 +1,50 @@
+<%
+  form_url = appointment.persisted? ? appointment_path(appointment) : appointments_path
+%>
+
+<p class="text-muted"><%= t "required_fields_html" %></p>
+
+<%= simple_form_for(appointment, url: form_url, local: true) do |f| %>
+  <fieldset class="form-fields">
+    <div class="form-floating mb-3">
+      <%= f.input_field :professional_id, as: :select, collection: @professionals.map{|p| %W[#{p.person.user} #{p.id}]}, class: "form-select", prompt: "Doutor" %>
+      <%= f.label :professional_id  %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :clinic_id, as: :select, collection: @clinics.map{|m| %W[#{m.corporate_name} #{m.id}]}, label: false, prompt: "Clínica", class: "form-select" %>
+      <%= f.label :clinic_id  %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.datetime_field :appointment_date, placeholder: "", class: "form-control" %>
+      <%= f.label :appointment_date %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :return, as: :select, collection: %w[Sim Não], class: "form-select", prompt: "Retorno" %>
+      <%= f.label :return  %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :status,
+                        as: :select,
+                        collection: %w[Concluída Pendente Cancelada],
+                        label: false,
+                        prompt: "Status",
+                        class: "form-select" %>
+      <%= f.label :status  %>
+    </div>
+  </fieldset>
+
+  <div class="form-actions">
+    <%= f.submit "Agendar consulta", class: "btn btn-primary" %>
+
+    <% if appointment.new_record? %>
+      <%= link_to "Voltar", appointments_path, class: "btn btn-secondary" %>
+    <% else %>
+      <%= link_to "Voltar", appointment_path(appointment) %>
+    <% end %>
+  </div>
+<% end %>
+

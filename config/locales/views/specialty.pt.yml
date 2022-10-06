@@ -1,0 +1,7 @@
+pt:
+  specialties:
+    index:
+      specialties_count_html:
+        zero: Não temos especialidades cadastradss.
+        one: "Hoje temos <b>%{count}</b> especialidade cadastrada."
+        other: "Hoje temos <b>%{count}</b> especialidades cadastradas."

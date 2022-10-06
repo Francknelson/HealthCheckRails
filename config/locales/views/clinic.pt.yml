@@ -1,0 +1,7 @@
+pt:
+  clinics:
+    index:
+      clinics_count_html:
+        zero: Não temos clínicas cadastradss.
+        one: "Hoje temos <b>%{count}</b> clínica cadastrada."
+        other: "Hoje temos <b>%{count}</b> clínicas cadastradas."

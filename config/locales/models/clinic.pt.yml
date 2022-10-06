@@ -1,0 +1,15 @@
+pt:
+  activerecord:
+    models:
+      clinic:
+        one: Clínica
+        other: Clínicas
+    attributes:
+      clinic:
+        corporate_name: Razão Social
+        cnpj: CNPJ
+        health_insurance: Convênio
+        specialty: Especialidade
+        addresses: Endereços
+        created_at: Cadastrado em
+        updated_at: Atualizado em

@@ -6,43 +6,43 @@ class DoctorsAppointmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get doctors_appointments_url
+    get appointments_url
     assert_response :success
   end
 
   test "should get new" do
-    get new_doctors_appointment_url
+    get new_appointment_url
     assert_response :success
   end
 
   test "should create doctors_appointment" do
-    assert_difference("DoctorsAppointment.count") do
-      post doctors_appointments_url, params: { doctors_appointment: {  } }
+    assert_difference("Appointment.count") do
+      post appointments_url, params: { doctors_appointment: {  } }
     end
 
-    assert_redirected_to doctors_appointment_url(DoctorsAppointment.last)
+    assert_redirected_to appointment_url(Appointment.last)
   end
 
   test "should show doctors_appointment" do
-    get doctors_appointment_url(@doctors_appointment)
+    get appointment_url(@doctors_appointment)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_doctors_appointment_url(@doctors_appointment)
+    get edit_appointment_url(@doctors_appointment)
     assert_response :success
   end
 
   test "should update doctors_appointment" do
-    patch doctors_appointment_url(@doctors_appointment), params: { doctors_appointment: {  } }
-    assert_redirected_to doctors_appointment_url(@doctors_appointment)
+    patch appointment_url(@doctors_appointment), params: { doctors_appointment: {  } }
+    assert_redirected_to appointment_url(@doctors_appointment)
   end
 
   test "should destroy doctors_appointment" do
-    assert_difference("DoctorsAppointment.count", -1) do
-      delete doctors_appointment_url(@doctors_appointment)
+    assert_difference("Appointment.count", -1) do
+      delete appointment_url(@doctors_appointment)
     end
 
-    assert_redirected_to doctors_appointments_url
+    assert_redirected_to appointments_url
   end
 end

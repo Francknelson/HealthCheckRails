@@ -1,17 +1,61 @@
-<%= form_with(model: professional) do |form| %>
-  <% if professional.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(professional.errors.count, "error") %> prohibited this professional from being saved:</h2>
+<%
+  form_url = professional.persisted? ? professional_path(professional) : professionals_path
+%>
 
-      <ul>
-        <% professional.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<p class="text-muted"><%= t "required_fields_html" %></p>
+
+<%= simple_form_for(professional, url: form_url, local: true) do |f| %>
+
+  <fieldset class="form-fields">
+    <div class="form-floating mb-3">
+      <%= f.input_field :person_id,
+                        as: :select,
+                        collection: @people.map{ |p| %W[#{p.user} #{p.id}]},
+                        label: false,
+                        prompt: "Usuário",
+                        class: "form-select" %>
+      <%= f.label :person_id  %>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.submit %>
+    <div class="form-floating mb-3">
+      <%= f.input_field :specialty_id,
+                        as: :select,
+                        collection: @specialties.map{ |s| %W[#{s.description} #{s.id}]},
+                        label: false,
+                        prompt: "Especialidade",
+                        class: "form-select" %>
+      <%= f.label :specialty_id  %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :clinic_id,
+                        as: :select,
+                        collection: @clinics.map{ |c| %W[#{c.corporate_name} #{c.id}]},
+                        label: false,
+                        prompt: "Clínica",
+                        class: "form-select" %>
+      <%= f.label :clinic_id  %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :cnpj, class: "form-control", placeholder: "CNPJ" %>
+      <%= f.label :cnpj %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :professional_record, class: "form-control", placeholder: "Registro Profissional" %>
+      <%= f.label :professional_record %>
+    </div>
+  </fieldset>
+
+  <div class="form-actions">
+
+    <% if professional.new_record? %>
+      <%= f.submit "Cadastrar", class: "btn btn-primary" %>
+      <%= link_to "Voltar", professionals_path, class: "btn btn-secondary" %>
+    <% else %>
+      <%= f.submit "Salvar", class: "btn btn-primary" %>
+      <%= link_to "Voltar", person_path(person), class: "btn btn-secondary" %>
+    <% end %>
   </div>
 <% end %>

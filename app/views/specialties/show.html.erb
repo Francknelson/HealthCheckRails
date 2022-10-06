@@ -1,10 +1,12 @@
-<p style="color: green"><%= notice %></p>
+<h1><%= Specialty.model_name.human %></h1>
 
-<%= render @specialty %>
+<div class="row">
+  <div class="col-3"><%= Specialty.human_attribute_name :description %></div>
+  <div class="col-9"><%= @specialty.description %></div>
+</div>
 
-<div>
-  <%= link_to "Edit this specialty", edit_specialty_path(@specialty) %> |
-  <%= link_to "Back to specialties", specialties_path %>
-
-  <%= button_to "Destroy this specialty", @specialty, method: :delete %>
+<div class="page-actions">
+  <%= link_to "Editar", edit_specialty_path(@specialty), class: "btn btn-primary" %>
+  <%= link_to "Deletar", specialty_path(@specialty), class: "btn btn-danger", method: :delete %>
+  <%= link_to "Voltar", specialties_path, class: "btn btn-secondary" %>
 </div>

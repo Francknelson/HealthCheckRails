@@ -1,14 +1,42 @@
-<p style="color: green"><%= notice %></p>
+<div class="row">
+  <div class="col-md-8">
+    <h1><%= Specialty.model_name.human count: 2 %></h1>
 
-<h1>Specialties</h1>
+    <p><%= t ".specialties_count_html", count: @specialties.size %></p>
+  </div>
 
-<div id="specialties">
-  <% @specialties.each do |specialty| %>
-    <%= render specialty %>
-    <p>
-      <%= link_to "Show this specialty", specialty %>
-    </p>
-  <% end %>
+  <div class="col-md-4 text-md-right d-print-none">
+    <%= link_to "Nova Especialidade", new_specialty_path, class: "btn btn-primary" %>
+  </div>
 </div>
 
-<%= link_to "New specialty", new_specialty_path %>
+
+<% if @specialties.any? %>
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th><%= Specialty.human_attribute_name :description %></th>
+      <th> <%= t "actions" %> </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @specialties.each do |specialty| %>
+      <tr>
+        <td><%= specialty.description %></td>
+        <td class="actions">
+          <%= link_to specialty_path(specialty) do %> <i class="fa fa-circle-info me-2"></i> <% end %>
+          <%= link_to edit_specialty_path(specialty) do %> <i class="fa-solid fa-pencil"></i> <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+  <p class="lead">
+    <%= link_to new_specialty_path do %>
+      <%= t "create_your_first_model", model_name: Specialty.model_name.human %>
+    <% end %>
+  </p>
+<% end %>

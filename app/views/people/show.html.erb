@@ -1,10 +1,34 @@
-<p style="color: green"><%= notice %></p>
+<h1><%= Person.model_name.human %></h1>
 
-<%= render @person %>
+<div class="row">
+  <div class="col-3"><%= Person.human_attribute_name :name %></div>
+  <div class="col-9"><%= @person.name %></div>
+  <div class="col-3"><%= Person.human_attribute_name :last_name %></div>
+  <div class="col-9"><%= @person.last_name %></div>
+  <div class="col-3"><%= Person.human_attribute_name :cpf %></div>
+  <div class="col-9"><%= @person.cpf %></div>
+  <div class="col-3"><%= Person.human_attribute_name :rg %></div>
+  <div class="col-9"><%= @person.rg %></div>
+  <div class="col-3"><%= Person.human_attribute_name :phone %></div>
+  <div class="col-9"><%= @person.phone %></div>
+  <div class="col-3"><%= Person.human_attribute_name :email %></div>
+  <div class="col-9"><%= @person.email %></div>
+  <div class="col-3"><%= Person.human_attribute_name :user %></div>
+  <div class="col-9"><%= @person.user %></div>
+  <div class="col-3"><%= Person.human_attribute_name :addresses %></div>
+  <div class="col-9">
+    <%= link_to "Novo endereço", new_person_person_address_path(@person), class: "btn btn-primary " %>
 
-<div>
-  <%= link_to "Edit this person", edit_person_path(@person) %> |
-  <%= link_to "Back to people", people_path %>
+    <% @person.person_addresses.each do |address| %>
+      <%= render "person_location", address: address, clinic: @person %>
+      <%= link_to "Editar", edit_person_person_address_path(@person, address), class: "btn btn-primary"  %>
+      <%= link_to "Deletar", person_person_address_path(@person, address), class: "btn btn-danger", method: :delete %>
+    <% end %>
+  </div>
+</div>
 
-  <%= button_to "Destroy this person", @person, method: :delete %>
+<div class="page-actions">
+  <%= link_to "Editar", edit_person_path(@person), class: "btn btn-primary" %>
+  <%= link_to "Deletar", person_path(@person), class: "btn btn-danger", method: :delete %>
+  <%= link_to "Voltar", people_path, class: "btn btn-secondary" %>
 </div>

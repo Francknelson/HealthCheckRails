@@ -25,7 +25,7 @@ class SpecialtiesController < ApplicationController
 
     respond_to do |format|
       if @specialty.save
-        format.html { redirect_to specialty_url(@specialty), notice: "Specialty was successfully created." }
+        format.html { redirect_to specialty_url(@specialty), notice: "Especialidade criada com sucesso!" }
         format.json { render :show, status: :created, location: @specialty }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class SpecialtiesController < ApplicationController
   def update
     respond_to do |format|
       if @specialty.update(specialty_params)
-        format.html { redirect_to specialty_url(@specialty), notice: "Specialty was successfully updated." }
+        format.html { redirect_to specialty_url(@specialty), notice: "Especialidade atualizada com sucesso!" }
         format.json { render :show, status: :ok, location: @specialty }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class SpecialtiesController < ApplicationController
     @specialty.destroy
 
     respond_to do |format|
-      format.html { redirect_to specialties_url, notice: "Specialty was successfully destroyed." }
+      format.html { redirect_to specialties_url, notice: "Especialidade excluída com sucesso!" }
       format.json { head :no_content }
     end
   end
@@ -65,6 +65,6 @@ class SpecialtiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def specialty_params
-      params.fetch(:specialty, {})
+      params.require(:specialty).permit(:description)
     end
 end

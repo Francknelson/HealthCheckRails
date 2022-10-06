@@ -1,2 +1,0 @@
-module DoctorsAppointmentsHelper
-end

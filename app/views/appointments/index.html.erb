@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-md-8">
+    <h1><%= Appointment.model_name.human count: 2 %></h1>
+
+    <p><%= t ".appointments_count_html", count: @appointments.size %></p>
+  </div>
+
+  <div class="col-md-4 text-md-right d-print-none">
+    <%= link_to "Nova Consulta", new_appointment_path, class: "btn btn-primary" %>
+  </div>
+</div>
+
+
+<% if @appointments.any? %>
+  <% @appointments.each do |appointment| %>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= appointment.clinic.corporate_name %></h5>
+        <h6 class="card-subtitle mb-2 text-muted">Dr. <%= appointment.professional.person.name %></h6>
+        <p class="card-text">
+          <span class="row">
+            <span class="col">
+              <%= Appointment.human_attribute_name :appointment_date %>: <%= appointment.appointment_date %>
+            </span>
+          </span>
+          <span class="row">
+            <span class="col">
+              <%= Appointment.human_attribute_name :return %>: <%= appointment.return %>
+            </span>
+          </span>
+          <span class="row">
+            <span class="col">
+              <%= Appointment.human_attribute_name :status %>: <%= appointment.status %>
+            </span>
+          </span>
+        </p>
+        <%= link_to "Exibir", appointment_path(appointment), class: "btn btn-secondary" %>
+        <%= link_to "Editar", edit_appointment_path(appointment), class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+
+<% else %>
+  <p class="lead">
+    <%= link_to new_appointment_path do %>
+      <%= t "create_your_first_model", model_name: Appointment.model_name.human %>
+    <% end %>
+  </p>
+<% end %>

@@ -1,0 +1,25 @@
+pt:
+  activerecord:
+    models:
+      professional:
+        one: Profissional
+        other: Profissionais
+    attributes:
+      professional:
+        name: Nome
+        last_name: Sobrenome
+        user: Usuário
+        password: Senha
+        password_confirmation: Confirmação de senha
+        cpf: CPF
+        rg: RG
+        cnpj: CNPJ
+        professional_record: Registro profissional
+        specialty: Especialidade
+        email: Email
+        phone: Telefone
+        address: Endereço
+        address_id: Endereço
+        addresses: Endereços
+        created_at: Cadastrado em
+        updated_at: Atualizado em
