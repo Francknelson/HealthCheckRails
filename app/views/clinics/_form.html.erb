@@ -7,6 +7,21 @@
 <%= simple_form_for(clinic, url: form_url, local: true) do |f| %>
 
   <fieldset class="form-fields">
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :user_id,
+                        as: :select,
+                        collection: @users.map{ |u| %W[#{u.email} #{u.id}]},
+                        label: false,
+                        prompt: "Usuário",
+                        class: "form-select" %>
+      <%= f.label :user_id %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.association :specialties, as: :check_boxes, label_method: :description %>
+    </div>
+
     <div class="form-floating mb-3">
       <%= f.input_field :corporate_name, class: "form-control", placeholder: "Razão Social" %>
       <%= f.label :corporate_name %>
@@ -15,16 +30,6 @@
     <div class="form-floating mb-3">
       <%= f.input_field :cnpj, class: "form-control", placeholder: "CNPJ" %>
       <%= f.label :cnpj %>
-    </div>
-
-    <div class="form-floating mb-3">
-      <%= f.input_field :specialty_id,
-                        as: :select,
-                        collection: @specialties.map{ |s| %W[#{s.description} #{s.id}]},
-                        label: false,
-                        prompt: "Especialidade",
-                        class: "form-select" %>
-      <%= f.label :specialty_id  %>
     </div>
 
     <div class="form-floating mb-3">

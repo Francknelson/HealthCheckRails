@@ -6,4 +6,7 @@ class Address < ApplicationRecord
             :city,
             :state,
             presence: true
+
+  belongs_to :user
+
 end

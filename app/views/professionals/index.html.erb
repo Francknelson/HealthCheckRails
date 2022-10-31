@@ -10,6 +10,12 @@
   </div>
 </div>
 
+<h4>Encontre <%= Professional.model_name.human count: 2 %> pelo <%= Professional.human_attribute_name :user_id %>:</h4>
+<%= form_tag(professionals_path, method: :get) do %>
+  <%= text_field_tag(:search, params[:search]) %>
+  <%= submit_tag("Buscar") %>
+<% end %>
+
 <% if @professionals.any? %>
   <% @professionals.each do |professional| %>
     <div class="card mb-3" style="max-width: 540px;">
@@ -19,11 +25,15 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title"><%= professional.person.name %> <%= professional.person.last_name %></h5>
+            <h5 class="card-title ">
+              <%= link_to(professional_path(professional), {class:"text-decoration-none text-reset"}) do %>
+                <%= professional.user.name %> <%= professional.user.last_name %>
+              <% end %>
+            </h5>
             <p class="card-text">
               <span class="row">
                 <span class="col">
-                  <%= Professional.human_attribute_name :email %>: <%= professional.person.email %>
+                  <%= Professional.human_attribute_name :email %>: <%= professional.user.email %>
                 </span>
               </span>
 
@@ -41,12 +51,12 @@
 
               <span class="row">
                 <span class="col">
-                  <%= Professional.human_attribute_name :specialty %>: <%= professional.specialty.description %>
+                  <%= Professional.human_attribute_name :specialties %>: <%= professional.specialties.count %>
                 </span>
               </span>
             </p>
             <p class="card-text"><small class="text-muted">
-              <%= Professional.human_attribute_name :updated_at %>: <%= professional.updated_at %>
+              <%= Professional.human_attribute_name :updated_at %>: <%= professional.updated_at.strftime("%d/%m/%Y - %H:%M") %>
             </small></p>
           </div>
         </div>

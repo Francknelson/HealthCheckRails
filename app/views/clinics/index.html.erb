@@ -10,6 +10,11 @@
   </div>
 </div>
 
+<h4>Encontre <%= Clinic.model_name.human count: 2 %> pela <%= Clinic.human_attribute_name :corporate_name %>:</h4>
+  <%= form_tag(clinics_path, method: :get) do %>
+    <%= text_field_tag(:search, params[:search]) %>
+    <%= submit_tag("Buscar") %>
+  <% end %>
 
 <% if @clinics.any? %>
   <table class="table table-striped table-hover">
@@ -18,7 +23,7 @@
       <th><%= Clinic.human_attribute_name :corporate_name %></th>
       <th><%= Clinic.human_attribute_name :cnpj %></th>
       <th><%= Clinic.human_attribute_name :health_insurance %></th>
-      <th><%= Clinic.human_attribute_name :specialty %></th>
+      <th><%= Clinic.human_attribute_name :specialties %></th>
       <th> <%= t "actions" %> </th>
     </tr>
     </thead>
@@ -29,7 +34,7 @@
         <td><%= clinic.corporate_name %></td>
         <td><%= clinic.cnpj %></td>
         <td><%= clinic.health_insurance %></td>
-        <td><%= clinic.specialty.description %></td>
+        <td><%= clinic.specialties.count %></td>
         <td class="actions">
           <%= link_to clinic_path(clinic) do %> <i class="fa fa-circle-info me-2"></i> <% end %>
           <%= link_to edit_clinic_path(clinic) do %> <i class="fa-solid fa-pencil"></i> <% end %>

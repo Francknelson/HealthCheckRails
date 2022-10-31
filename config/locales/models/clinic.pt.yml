@@ -10,6 +10,7 @@ pt:
         cnpj: CNPJ
         health_insurance: Convênio
         specialty: Especialidade
+        specialties: Especialidades
         addresses: Endereços
         created_at: Cadastrado em
         updated_at: Atualizado em

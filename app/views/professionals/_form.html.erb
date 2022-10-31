@@ -8,33 +8,37 @@
 
   <fieldset class="form-fields">
     <div class="form-floating mb-3">
-      <%= f.input_field :person_id,
+      <%= f.input_field :user_id,
                         as: :select,
-                        collection: @people.map{ |p| %W[#{p.user} #{p.id}]},
+                        collection: @users.map{ |u| %W[#{u.name} #{u.id}]},
                         label: false,
                         prompt: "Usuário",
                         class: "form-select" %>
-      <%= f.label :person_id  %>
+      <%= f.label :user_id  %>
     </div>
 
     <div class="form-floating mb-3">
-      <%= f.input_field :specialty_id,
-                        as: :select,
-                        collection: @specialties.map{ |s| %W[#{s.description} #{s.id}]},
-                        label: false,
-                        prompt: "Especialidade",
-                        class: "form-select" %>
-      <%= f.label :specialty_id  %>
+      <%= f.association :specialties, as: :check_boxes, label_method: :description %>
     </div>
 
     <div class="form-floating mb-3">
-      <%= f.input_field :clinic_id,
-                        as: :select,
-                        collection: @clinics.map{ |c| %W[#{c.corporate_name} #{c.id}]},
-                        label: false,
-                        prompt: "Clínica",
-                        class: "form-select" %>
-      <%= f.label :clinic_id  %>
+      <% if current_user.admin? %>
+        <%= f.input_field :clinic_id,
+                          as: :select,
+                          collection: @clinics.map { |c| %W[#{c.corporate_name} #{c.id}]},
+                          label: false,
+                          prompt: "Clínica",
+                          class: "form-select" %>
+        <%= f.label :clinic_id  %>
+      <% else %>
+        <%= f.input_field :clinic_id,
+                          as: :select,
+                          collection: Clinic.where(user_id: session[:user_id]),
+                          label: false,
+                          prompt: "Clínica",
+                          class: "form-select" %>
+        <%= f.label :clinic_id  %>
+      <% end %>
     </div>
 
     <div class="form-floating mb-3">
@@ -55,7 +59,7 @@
       <%= link_to "Voltar", professionals_path, class: "btn btn-secondary" %>
     <% else %>
       <%= f.submit "Salvar", class: "btn btn-primary" %>
-      <%= link_to "Voltar", person_path(person), class: "btn btn-secondary" %>
+      <%= link_to "Voltar", user_path(@current_user), class: "btn btn-secondary" %>
     <% end %>
   </div>
 <% end %>

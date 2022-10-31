@@ -1,12 +1,12 @@
 class ProfessionalsController < ApplicationController
   before_action :set_professional, only: %i[ show edit update destroy ]
-  before_action :set_people, only: %i[ new create edit update ]
+  before_action :set_users, only: %i[ new create edit update ]
   before_action :set_specialties, only: %i[ new create edit update ]
   before_action :set_clinic, only: %i[ new create update edit ]
 
   # GET /professionals or /professionals.json
   def index
-    @professionals = Professional.all
+    @professionals = Professional.search(params[:search])
   end
 
   # GET /professionals/1 or /professionals/1.json
@@ -66,8 +66,8 @@ class ProfessionalsController < ApplicationController
     @clinics = Clinic.all
   end
 
-  def set_people
-    @people = Person.all
+  def set_users
+    @users = User.all
   end
 
   def set_specialties
@@ -81,6 +81,6 @@ class ProfessionalsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def professional_params
-    params.require(:professional).permit(:person_id, :cnpj, :professional_record, :specialty_id, :clinic_id)
+    params.require(:professional).permit(:user_id, :cnpj, :professional_record, :clinic_id, :search, specialty_ids: [])
   end
 end

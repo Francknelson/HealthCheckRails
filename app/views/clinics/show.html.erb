@@ -7,16 +7,16 @@
   <div class="col-9"><%= @clinic.cnpj %></div>
   <div class="col-3"><%= Clinic.human_attribute_name :health_insurance %></div>
   <div class="col-9"><%= @clinic.health_insurance %></div>
-  <div class="col-3"><%= Clinic.human_attribute_name :specialty %></div>
-  <div class="col-9"><%= @clinic.specialty.description%></div>
+  <div class="col-3"><%= Clinic.human_attribute_name :specialties %></div>
+  <div class="col-9">
+    <% @clinic.specialties.each do |specialty| %>
+      <%= specialty.description %>
+    <% end %>
+  </div>
   <div class="col-3"><%= Clinic.human_attribute_name :addresses %></div>
   <div class="col-9">
-    <%= link_to "Novo endereço", new_clinic_clinic_address_path(@clinic), class: "btn btn-primary " %>
-
-    <% @clinic.clinic_addresses.each do |address| %>
+    <% @clinic.addresses.each do |address| %>
       <%= render "clinic_location", address: address, clinic: @clinic %>
-      <%= link_to "Editar", edit_clinic_clinic_address_path(@clinic, address), class: "btn btn-primary"  %>
-      <%= link_to "Deletar", clinic_clinic_address_path(@clinic, address), class: "btn btn-danger", method: :delete %>
     <% end %>
   </div>
 </div>

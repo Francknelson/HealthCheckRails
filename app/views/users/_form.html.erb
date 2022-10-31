@@ -1,0 +1,62 @@
+<%
+  form_url = user.persisted? ? user_path(user) : users_path
+%>
+
+<p class="text-muted"><%= t "required_fields_html" %></p>
+
+<%= simple_form_for(user, url: form_url, local: true) do |f| %>
+
+  <fieldset class="form-fields">
+    <div class="form-floating mb-3">
+      <%= f.input_field :name, class: "form-control", placeholder: "Nome" %>
+      <%= f.label :name %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :last_name, class: "form-control", placeholder: "Sobrenome" %>
+      <%= f.label :last_name %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :email, class: "form-control", placeholder: "E-mail" %>
+      <%= f.label :email %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :phone, class: "form-control", placeholder: "Telefone" %>
+      <%= f.label :phone %>
+    </div>
+    <% if user.new_record? %>
+      <div class="form-floating mb-3">
+        <%= f.password_field :password, class: "form-control", placeholder: "Senha" %>
+        <%= f.label :password %>
+      </div>
+
+      <div class="form-floating mb-3">
+        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirme a senha" %>
+        <%= f.label :password_confirmation %>
+      </div>
+    <% else %>
+      <div class="form-floating mb-3">
+        <%= f.password_field :password, class: "form-control", placeholder: "Senha", value: @user.password %>
+        <%= f.label :password %>
+      </div>
+
+      <div class="form-floating mb-3">
+        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirme a senha", value: @user.password %>
+        <%= f.label :password_confirmation %>
+      </div>
+    <% end %>
+  </fieldset>
+
+  <div class="form-actions">
+
+    <% if user.new_record? %>
+      <%= f.submit "Cadastrar", class: "btn btn-primary" %>
+      <%= link_to "Voltar", signin_path, class: "btn btn-secondary" %>
+    <% else %>
+      <%= f.submit "Salvar", class: "btn btn-primary" %>
+      <%= link_to "Voltar", user_path(user), class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+<% end %>

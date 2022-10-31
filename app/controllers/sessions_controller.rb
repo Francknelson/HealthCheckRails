@@ -3,9 +3,9 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = Person.authenticate(params[:session][:email], params[:session][:password])
-    if @user
-      session[:user_id] = @user.id
+    @person = User.authenticate(params[:session][:email], params[:session][:password])
+    if @person
+      session[:user_id] = @person.id
       respond_to do |format|
         format.html { redirect_to "/", notice: "Você está logado." }
         format.json { head :no_content }

@@ -1,0 +1,7 @@
+pt:
+  users:
+    index:
+      users_count_html:
+        zero: Não temos usuários cadastrados.
+        one: "Hoje temos <b>%{count}</b> usuário cadastrado."
+        other: "Hoje temos <b>%{count}</b> usuários cadastrados."

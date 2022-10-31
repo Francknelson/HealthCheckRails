@@ -6,12 +6,12 @@ class PeopleTest < ApplicationSystemTestCase
   end
 
   test "visiting the index" do
-    visit people_url
+    visit users_url
     assert_selector "h1", text: "People"
   end
 
   test "should create person" do
-    visit people_url
+    visit users_url
     click_on "New person"
 
     click_on "Create Person"
@@ -21,7 +21,7 @@ class PeopleTest < ApplicationSystemTestCase
   end
 
   test "should update Person" do
-    visit person_url(@person)
+    visit user_url(@person)
     click_on "Edit this person", match: :first
 
     click_on "Update Person"
@@ -31,7 +31,7 @@ class PeopleTest < ApplicationSystemTestCase
   end
 
   test "should destroy Person" do
-    visit person_url(@person)
+    visit user_url(@person)
     click_on "Destroy this person", match: :first
 
     assert_text "Person was successfully destroyed"

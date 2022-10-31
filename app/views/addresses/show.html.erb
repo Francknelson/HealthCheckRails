@@ -1,0 +1,24 @@
+<h1><%= Address.model_name.human %></h1>
+
+<div class="row">
+  <div class="col-3"><%= Address.human_attribute_name :zipcode %></div>
+  <div class="col-9"><%= @address.zipcode %></div>
+  <div class="col-3"><%= Address.human_attribute_name :street %></div>
+  <div class="col-9"><%= @address.street %></div>
+  <div class="col-3"><%= Address.human_attribute_name :number %></div>
+  <div class="col-9"><%= @address.number %></div>
+  <div class="col-3"><%= Address.human_attribute_name :neighborhood %></div>
+  <div class="col-9"><%= @address.neighborhood %></div>
+  <div class="col-3"><%= Address.human_attribute_name :city %></div>
+  <div class="col-9"><%= @address.city %></div>
+  <div class="col-3"><%= Address.human_attribute_name :state %></div>
+  <div class="col-9"><%= @address.state %></div>
+  <div class="col-3"><%= Address.human_attribute_name :complement %></div>
+  <div class="col-9"><%= @address.complement %></div>
+</div>
+
+<div class="page-actions">
+  <%= link_to "Editar", edit_user_address_path(@current_user, @address), class: "btn btn-primary" %>
+  <%= link_to "Deletar", user_address_path(@current_user, @address), class: "btn btn-danger" %>
+  <%= link_to "Voltar", user_path(@current_user), class: "btn btn-secondary" %>
+</div>

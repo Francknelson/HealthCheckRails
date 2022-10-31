@@ -1,10 +1,12 @@
 class ClinicsController < ApplicationController
   before_action :set_clinic, only: %i[ show edit update destroy ]
-  before_action :set_specialties, only: %i[ new create ]
+  before_action :set_specialties, only: %i[ new create edit update ]
+  before_action :set_users, only: %i[ new create edit update ]
+
 
   # GET /clinics or /clinics.json
   def index
-    @clinics = Clinic.all
+    @clinics = Clinic.search(params[:search])
   end
 
   # GET /clinics/1 or /clinics/1.json
@@ -69,8 +71,12 @@ class ClinicsController < ApplicationController
     @clinic = Clinic.find(params[:id])
   end
 
+  def set_users
+    @users = User.all
+  end
+
   # Only allow a list of trusted parameters through.
   def clinic_params
-    params.require(:clinic).permit(:corporate_name, :cnpj, :address, :phone, :email, :specialty_id)
+    params.require(:clinic).permit(:corporate_name, :cnpj, :address, :phone, :email, :specialty, :user_id, :health_insurance, :search, specialty_ids: [])
   end
 end

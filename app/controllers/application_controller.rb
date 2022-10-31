@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
+  before_action :current_user
 
   protect_from_forgery with: :exception
 
@@ -12,10 +13,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private
   def current_user
   if session[:user_id]
-    @current_user = Person.find(session[:user_id])
+    @current_user ||= User.find(session[:user_id])
   end
 end
 end

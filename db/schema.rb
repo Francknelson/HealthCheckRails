@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_05_064552) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_30_183304) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,8 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_064552) do
     t.string "neighborhood", null: false
     t.string "city", null: false
     t.string "state", null: false
-    t.bigint "person_id"
-    t.bigint "clinic_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -38,26 +37,34 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_064552) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "clinics", force: :cascade do |t|
-    t.string "corporate_name", null: false
-    t.string "cnpj", null: false
-    t.string "health_insurance"
+  create_table "clients", force: :cascade do |t|
+    t.string "cpf", null: false
+    t.string "rg"
+    t.date "birth_date"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "clinic_specialties", force: :cascade do |t|
+    t.bigint "clinic_id", null: false
     t.bigint "specialty_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "people", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "last_name", null: false
-    t.string "cpf", null: false
-    t.string "rg"
-    t.string "email", null: false
-    t.string "phone"
-    t.string "user", null: false
-    t.string "password_hash", null: false
-    t.string "password_salt", null: false
-    t.date "birth_date"
+  create_table "clinics", force: :cascade do |t|
+    t.string "corporate_name", null: false
+    t.string "cnpj", null: false
+    t.string "health_insurance"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "professional_specialties", force: :cascade do |t|
+    t.bigint "professional_id", null: false
+    t.bigint "specialty_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -65,9 +72,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_064552) do
   create_table "professionals", force: :cascade do |t|
     t.string "cnpj"
     t.string "professional_record", null: false
-    t.bigint "person_id", null: false
-    t.bigint "specialty_id", null: false
     t.bigint "clinic_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -78,12 +84,30 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_064552) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "addresses", "clinics", name: "addresses_clinic_id_fkey"
-  add_foreign_key "addresses", "people", name: "addresses_person_id_fkey"
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "last_name"
+    t.string "email", null: false
+    t.string "password_hash", null: false
+    t.string "password_salt", null: false
+    t.string "phone"
+    t.boolean "admin", default: false
+    t.boolean "client", default: false
+    t.boolean "professional", default: false
+    t.boolean "clinic", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "addresses", "users", name: "addresses_person_id_fkey"
   add_foreign_key "appointments", "clinics", name: "appointments_clinic_id_fkey"
   add_foreign_key "appointments", "professionals", name: "appointments_professional_id_fkey"
-  add_foreign_key "clinics", "specialties", name: "clinics_specialty_id_fkey"
+  add_foreign_key "clients", "users", name: "clients_user_id_fkey"
+  add_foreign_key "clinic_specialties", "clinics", name: "clinic_specialties_clinic_id_fkey"
+  add_foreign_key "clinic_specialties", "specialties", name: "clinic_specialties_specialty_id_fkey"
+  add_foreign_key "clinics", "users", name: "clinics_user_id_fkey"
+  add_foreign_key "professional_specialties", "professionals", name: "professional_specialties_professional_id_fkey"
+  add_foreign_key "professional_specialties", "specialties", name: "professional_specialties_specialty_id_fkey"
   add_foreign_key "professionals", "clinics", name: "professionals_clinic_id_fkey"
-  add_foreign_key "professionals", "people", name: "professionals_person_id_fkey"
-  add_foreign_key "professionals", "specialties", name: "professionals_specialty_id_fkey"
+  add_foreign_key "professionals", "users", name: "professionals_user_id_fkey"
 end

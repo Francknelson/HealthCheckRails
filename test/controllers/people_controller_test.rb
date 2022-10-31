@@ -6,43 +6,43 @@ class PeopleControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get people_url
+    get users_url
     assert_response :success
   end
 
   test "should get new" do
-    get new_person_url
+    get new_user_url
     assert_response :success
   end
 
   test "should create person" do
     assert_difference("Person.count") do
-      post people_url, params: { person: {  } }
+      post users_url, params: { person: {  } }
     end
 
-    assert_redirected_to person_url(Person.last)
+    assert_redirected_to user_url(User.last)
   end
 
   test "should show person" do
-    get person_url(@person)
+    get user_url(@person)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_person_url(@person)
+    get edit_user_url(@person)
     assert_response :success
   end
 
   test "should update person" do
-    patch person_url(@person), params: { person: {  } }
-    assert_redirected_to person_url(@person)
+    patch user_url(@person), params: { person: {  } }
+    assert_redirected_to user_url(@person)
   end
 
   test "should destroy person" do
     assert_difference("Person.count", -1) do
-      delete person_url(@person)
+      delete user_url(@person)
     end
 
-    assert_redirected_to people_url
+    assert_redirected_to users_url
   end
 end
