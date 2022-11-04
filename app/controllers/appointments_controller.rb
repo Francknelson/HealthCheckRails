@@ -1,5 +1,6 @@
 class AppointmentsController < ApplicationController
   before_action :set_appointment, only: %i[ show edit update destroy ]
+  before_action :set_clients, only: %i[ new edit update create ]
   before_action :set_professionals, only: %i[ new edit update create ]
   before_action :set_clinics, only: %i[ new edit update create ]
 
@@ -65,6 +66,10 @@ class AppointmentsController < ApplicationController
     @clinics = Clinic.all
   end
 
+  def set_clients
+    @clients = Client.all
+  end
+
   def set_professionals
     @professionals = Professional.all
   end
@@ -76,6 +81,6 @@ class AppointmentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def appointment_params
-    params.require(:appointment).permit(:person_id, :clinic_id, :appointment_date, :return, :professional_id, :status)
+    params.require(:appointment).permit(:person_id, :clinic_id, :appointment_date, :return, :professional_id, :status, :client_id)
   end
 end

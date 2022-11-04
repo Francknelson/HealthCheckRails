@@ -4,6 +4,13 @@ pt:
       user:
         one: Usuário
         other: Usuários
+    values:
+      user:
+        user_type:
+          admin: Administrador
+          'client': Paciente
+          'professional': Profissional
+          'clinic': Clínica
     attributes:
       user:
         name: Nome
@@ -12,6 +19,8 @@ pt:
         password_confirmation: Confirmação de senha
         email: Email
         phone: Telefone
+        user_type: Tipo de usuário
+        user_type_id: Tipo de usuário
         address: Endereço
         address_id: Endereço
         addresses: Endereços

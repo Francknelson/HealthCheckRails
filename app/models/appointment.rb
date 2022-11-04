@@ -8,4 +8,5 @@ class Appointment < ApplicationRecord
 
   belongs_to :professional
   belongs_to :clinic
+  belongs_to :client
 end

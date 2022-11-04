@@ -12,7 +12,7 @@ class Clinic < ApplicationRecord
 
   def self.search(search)
     if search
-      where('corporate_name LIKE ?', "%#{search}%")
+      where('corporate_name LIKE ? OR cnpj LIKE ? OR health_insurance LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
     else
       all
     end

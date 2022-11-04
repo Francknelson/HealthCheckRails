@@ -10,9 +10,9 @@
   </div>
 </div>
 
-<h4>Encontre <%= Professional.model_name.human count: 2 %> pelo <%= Professional.human_attribute_name :user_id %>:</h4>
+<h4>Encontre <%= Professional.model_name.human count: 2 %>:</h4>
 <%= form_tag(professionals_path, method: :get) do %>
-  <%= text_field_tag(:search, params[:search]) %>
+  <%= text_field_tag(:search, params[:search], placeholder: "Nome, Email ou CNPJ") %>
   <%= submit_tag("Buscar") %>
 <% end %>
 
@@ -51,7 +51,7 @@
 
               <span class="row">
                 <span class="col">
-                  <%= Professional.human_attribute_name :specialties %>: <%= professional.specialties.count %>
+                  <%= Professional.human_attribute_name :specialties %>: <% professional.specialties.each do |specialty| %> <%= specialty.description %> <% end %>
                 </span>
               </span>
             </p>

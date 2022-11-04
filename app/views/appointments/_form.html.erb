@@ -7,6 +7,11 @@
 <%= simple_form_for(appointment, url: form_url, local: true) do |f| %>
   <fieldset class="form-fields">
     <div class="form-floating mb-3">
+      <%= f.input_field :client_id, as: :select, collection: @clients.map{|c| %W[#{c.user.name} #{c.id}]}, class: "form-select", prompt: "Paciente" %>
+      <%= f.label :client_id  %>
+    </div>
+
+    <div class="form-floating mb-3">
       <%= f.input_field :professional_id, as: :select, collection: @professionals.map{|p| %W[#{p.user.name} #{p.id}]}, class: "form-select", prompt: "Doutor" %>
       <%= f.label :professional_id  %>
     </div>

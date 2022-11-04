@@ -1,0 +1,46 @@
+<%
+  form_url = client.persisted? ? client_path(client) : clients_path
+%>
+
+<p class="text-muted"><%= t "required_fields_html" %></p>
+
+<%= simple_form_for(client, url: form_url, local: true) do |f| %>
+
+  <fieldset class="form-fields">
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :client_id,
+                        as: :select,
+                        collection: @clients.map{ |c| %W[#{c.user.name} #{c.id}]},
+                        label: false,
+                        prompt: "Paciente",
+                        class: "form-select" %>
+      <%= f.label :client_id %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :cpf, class: "form-control", placeholder: "CPF" %>
+      <%= f.label :cpf %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :rg, class: "form-control", placeholder: "RG" %>
+      <%= f.label :rg %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.date_field :birth_date, class: "form-control", placeholder: "Data de nascimento" %>
+      <%= f.label :birth_date %>
+    </div>
+  </fieldset>
+
+  <div class="form-actions">
+    <% if client.new_record? %>
+      <%= f.submit "Adicionar Paciente", class: "btn btn-primary" %>
+      <%= link_to "Voltar", clients_path, class: "btn btn-secondary" %>
+    <% else %>
+      <%= f.submit "Atualizar Paciente", class: "btn btn-primary" %>
+      <%= link_to "Voltar", client_path(client), class: "btn btn-secondary"  %>
+    <% end %>
+  </div>
+<% end %>

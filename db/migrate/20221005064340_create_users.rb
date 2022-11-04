@@ -7,11 +7,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :password_hash, null: false
       t.string :password_salt, null: false
       t.string :phone
-
-      t.boolean :admin, default: false
-      t.boolean :client, default: false
-      t.boolean :professional, default: false
-      t.boolean :clinic, default: false
+      t.string :user_type
 
       t.timestamps null: false
     end

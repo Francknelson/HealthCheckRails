@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :clinics
+  resources :clients
   resources :specialties
   resources :professionals
   resources :appointments

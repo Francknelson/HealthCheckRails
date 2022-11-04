@@ -6,6 +6,10 @@ pt:
         other: Consultas
     attributes:
       appointment:
+        appointment: Consulta
+        appointment_id: Consulta
+        client: Paciente
+        client_id: Paciente
         professional: Profissional
         professional_id: Profissional
         clinic: Clínica

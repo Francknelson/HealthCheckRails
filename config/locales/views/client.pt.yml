@@ -1,0 +1,7 @@
+pt:
+  clients:
+    index:
+      clients_count_html:
+        zero: Não temos pacientes cadastrados.
+        one: "Hoje temos <b>%{count}</b> paciente cadastrado."
+        other: "Hoje temos <b>%{count}</b> pacientes cadastrados."

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # GET /people or /people.json
   def index
-    @users = User.all
+    @users = User.search(params[:search])
   end
 
   # GET /people/1 or /people/1.json
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         format.html { redirect_to "/", notice: "Usuário cadastrado com sucesso!" }
-        session[:user_id] = @user.id
+        session[:user_id] = @user.id if @current_user.nil?
       else
         format.html { redirect_to signup_path, notice: "Usuário não pode ser cadastrado." }
       end

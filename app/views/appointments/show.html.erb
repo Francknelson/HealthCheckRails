@@ -1,6 +1,8 @@
 <h1><%= Appointment.model_name.human %></h1>
 
 <div class="row">
+  <div class="col-3"><%= Appointment.human_attribute_name :client %></div>
+  <div class="col-9"><%= @appointment.client.user.name %></div>
   <div class="col-3"><%= Appointment.human_attribute_name :professional %></div>
   <div class="col-9"><%= @appointment.professional.user.name %></div>
   <div class="col-3"><%= Appointment.human_attribute_name :clinic %></div>

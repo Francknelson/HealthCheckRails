@@ -28,6 +28,7 @@ class ClinicsController < ApplicationController
 
     respond_to do |format|
       if @clinic.save
+        @clinic.user.user_type = "clinic" if @clinic.user.user_type.nil?
         format.html { redirect_to clinic_url(@clinic), notice: "Clínica criada com sucesso!" }
         format.json { render :show, status: :created, location: @clinic }
       else

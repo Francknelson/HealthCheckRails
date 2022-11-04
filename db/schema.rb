@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_30_183304) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_03_225139) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_30_183304) do
     t.bigint "clinic_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "client_id", null: false
   end
 
   create_table "clients", force: :cascade do |t|
@@ -91,15 +92,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_30_183304) do
     t.string "password_hash", null: false
     t.string "password_salt", null: false
     t.string "phone"
-    t.boolean "admin", default: false
-    t.boolean "client", default: false
-    t.boolean "professional", default: false
-    t.boolean "clinic", default: false
+    t.string "user_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "addresses", "users", name: "addresses_person_id_fkey"
+  add_foreign_key "appointments", "clients", name: "appointments_client_id_fkey"
   add_foreign_key "appointments", "clinics", name: "appointments_clinic_id_fkey"
   add_foreign_key "appointments", "professionals", name: "appointments_professional_id_fkey"
   add_foreign_key "clients", "users", name: "clients_user_id_fkey"

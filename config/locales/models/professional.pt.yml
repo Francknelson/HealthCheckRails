@@ -9,6 +9,7 @@ pt:
         name: Nome
         last_name: Sobrenome
         user: Usuário
+        user_id: Usuário
         password: Senha
         password_confirmation: Confirmação de senha
         cpf: CPF
@@ -16,6 +17,7 @@ pt:
         cnpj: CNPJ
         professional_record: Registro profissional
         specialty: Especialidade
+        specialties: Especialidades
         email: Email
         phone: Telefone
         address: Endereço

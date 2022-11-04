@@ -17,6 +17,8 @@ class User < ApplicationRecord
 
   has_one :clinic, dependent: :restrict_with_error
   has_one :professional, dependent: :restrict_with_error
+  has_one :client, dependent: :restrict_with_error
+
   has_many :addresses, dependent: :destroy
   has_many :specialties, dependent: :destroy
 
@@ -31,6 +33,14 @@ class User < ApplicationRecord
       user
     else
       nil
+    end
+  end
+
+  def self.search(search)
+    if search
+      where('name ILIKE ? OR email ILIKE ? OR user_type ILIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
+    else
+      all
     end
   end
 end

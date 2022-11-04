@@ -1,0 +1,23 @@
+pt:
+  activerecord:
+    models:
+      client:
+        one: Paciente
+        other: Pacientes
+    attributes:
+      client:
+        client: Paciente
+        client_id: Paciente
+        user: Usuário
+        user_id: Usuário
+        name: Nome
+        last_name: Sobrenome
+        email: Email
+        phone: Telefone
+        cpf: CPF
+        rg: RG
+        birth_date: Data de Nascimento
+        address: Endereço
+        addresses: Endereços
+        created_at: Cadastrado em
+        updated_at: Atualizado em

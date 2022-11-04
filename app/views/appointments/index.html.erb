@@ -20,6 +20,11 @@
         <p class="card-text">
           <span class="row">
             <span class="col">
+              <%= Appointment.human_attribute_name :client %>: <%= appointment.client.user.name %>
+            </span>
+          </span>
+          <span class="row">
+            <span class="col">
               <%= Appointment.human_attribute_name :appointment_date %>: <%= appointment.appointment_date %>
             </span>
           </span>

@@ -28,6 +28,7 @@ class ProfessionalsController < ApplicationController
 
     respond_to do |format|
       if @professional.save
+        @professional.user.user_type = "professional" if @professional.user.user_type.nil?
         format.html { redirect_to professional_url(@professional), notice: "Profissional criado com sucesso!" }
         format.json { render :show, status: :created, location: @professional }
       else
