@@ -49,8 +49,9 @@
             </span>
           </span>
           </p>
-          <%= link_to "Exibir", appointment_path(appointment), class: "btn btn-secondary" %>
-          <%= link_to "Editar", edit_appointment_path(appointment), class: "btn btn-primary" %>
+          <% unless current_user.client || current_user.user_type.nil? %>
+            <%= link_to "Exibir", appointment_path(appointment), class: "btn btn-secondary" %>
+          <% end %>
         </div>
       </div>
     <% end %>

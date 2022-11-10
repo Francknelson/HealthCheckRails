@@ -63,6 +63,16 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def cancel
+    @appointment = Appointment.find(params[:appointment_id])
+    @appointment.update(status: "Cancelada")
+
+    respond_to do |format|
+      format.html { redirect_to appointment_url(@appointment), notice: "Consulta atualizada com sucesso!" }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def set_clinics

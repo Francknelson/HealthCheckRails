@@ -19,5 +19,7 @@ Rails.application.routes.draw do
   resources :clients
   resources :specialties
   resources :professionals
-  resources :appointments
+  resources :appointments do
+    get '/cancel' => 'appointments#cancel'
+  end
 end
