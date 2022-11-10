@@ -2,7 +2,9 @@
   form_url = specialty.persisted? ? specialty_path(specialty) : specialties_path
 %>
 
-<p class="text-muted"><%= t "required_fields_html" %></p>
+<div class="row text-center">
+  <p class="text-muted"><%= t "required_fields_html" %></p>
+</div>
 
 <%= simple_form_for(specialty, url: form_url, local: true) do |f| %>
 

@@ -1,9 +1,11 @@
 class Client < ApplicationRecord
   validates :cpf,
             :user_id,
+            :clinic_id,
             presence: true
 
   belongs_to :user
+  belongs_to :clinic
 
   has_many :addresses, through: :user
   has_many :appointments, dependent: :restrict_with_error

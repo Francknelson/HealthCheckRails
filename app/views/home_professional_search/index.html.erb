@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col">
+    <h1><%= Professional.model_name.human count: 2 %></h1>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <h4>Encontre <%= Professional.model_name.human count: 2 %>:</h4>
+  <%= form_tag(professionals_search_path, method: :get) do %>
+    <%= text_field_tag(:search, params[:search], size: 50, placeholder: "Nome, Email, CNPJ ou Cidade") %>
+    <%= submit_tag("Buscar") %>
+    <%= link_to 'X', professionals_search_path, class:"btn", style:"color: red;" %>
+  <% end %>
+</div>
+
+<div class="row">
+  <% if @professionals.any? %>
+    <% @professionals.each do |professional| %>
+      <div class="card mb-3 ms-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="https://cdn-icons-png.flaticon.com/512/1198/1198344.png" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title ">
+                  <%= professional.user.name %> <%= professional.user.last_name %>
+              </h5>
+              <p class="card-text">
+              <span class="row">
+                <span class="col">
+                  <%= Professional.human_attribute_name :email %>: <%= professional.user.email %>
+                </span>
+              </span>
+
+                <span class="row">
+                <span class="col">
+                  <%= Professional.human_attribute_name :cnpj %>: <%= professional.cnpj %>
+                </span>
+              </span>
+
+                <span class="row">
+                <span class="col">
+                  <%= Professional.human_attribute_name :professional_record %>: <%= professional.professional_record %>
+                </span>
+              </span>
+
+                <span class="row">
+                <span class="col">
+                  <%= Professional.human_attribute_name :specialties %>: <% professional.specialties.each do |specialty| %> <%= specialty.description %> <% end %>
+                </span>
+              </span>
+              </p>
+              <p class="card-text"><small class="text-muted">
+                <%= Professional.human_attribute_name :updated_at %>: <%= professional.updated_at.strftime("%d/%m/%Y - %H:%M") %>
+              </small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    </div>
+
+  <% else %>
+    <p>Não temos profissionais cadastrados.</p>
+  <% end %>

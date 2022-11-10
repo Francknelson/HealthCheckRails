@@ -1,48 +1,87 @@
-<div class="row">
-  <div class="col-md-8">
+<div class="row text-center">
+  <div class="col-4"></div>
+  <div class="col-md-4 text-center">
     <h1><%= Clinic.model_name.human count: 2 %></h1>
-
     <p><%= t ".clinics_count_html", count: @clinics.size %></p>
   </div>
 
-  <div class="col-md-4 text-md-right d-print-none">
+  <div class="col-md-4 text-md-center d-print-none">
     <%= link_to "Nova clínica", new_clinic_path, class: "btn btn-primary" %>
   </div>
 </div>
 
-<h4>Encontre <%= Clinic.model_name.human count: 2 %> pela <%= Clinic.human_attribute_name :corporate_name %>:</h4>
+<div class="row mb-3">
+  <h4>Encontre <%= Clinic.model_name.human count: 2 %> :</h4>
   <%= form_tag(clinics_path, method: :get) do %>
-    <%= text_field_tag(:search, params[:search]) %>
+    <%= text_field_tag(:search, params[:search], size: 50, placeholder: "Nome, Razão social, Email, CNPJ, Plano de saúde ou Cidade") %>
     <%= submit_tag("Buscar") %>
+    <%= link_to 'X', clinics_path, class:"btn", style:"color: red;" %>
   <% end %>
+</div>
 
-<% if @clinics.any? %>
-  <table class="table table-striped table-hover">
-    <thead>
-    <tr>
-      <th><%= Clinic.human_attribute_name :corporate_name %></th>
-      <th><%= Clinic.human_attribute_name :cnpj %></th>
-      <th><%= Clinic.human_attribute_name :health_insurance %></th>
-      <th><%= Clinic.human_attribute_name :specialties %></th>
-      <th> <%= t "actions" %> </th>
-    </tr>
-    </thead>
-
-    <tbody>
+<div class="row">
+  <% if @clinics.any? %>
     <% @clinics.each do |clinic| %>
-      <tr>
-        <td><%= clinic.corporate_name %></td>
-        <td><%= clinic.cnpj %></td>
-        <td><%= clinic.health_insurance %></td>
-        <td><%= clinic.specialties.count %></td>
-        <td class="actions">
-          <%= link_to clinic_path(clinic) do %> <i class="fa fa-circle-info me-2"></i> <% end %>
-          <%= link_to edit_clinic_path(clinic) do %> <i class="fa-solid fa-pencil"></i> <% end %>
-        </td>
-      </tr>
+      <div class="card mb-3 mt-3 ms-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="https://cdn-icons-png.flaticon.com/512/3688/3688596.png" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title ">
+                <%= link_to(clinic_path(clinic), {class:"text-decoration-none text-reset"}) do %>
+                  <%= clinic.user.name %> <%= clinic.user.last_name %>
+                <% end %>
+              </h5>
+              <p class="card-text">
+              <span class="row">
+                <span class="col">
+                  <%= Clinic.human_attribute_name :email %>: <%= clinic.user.email %>
+                </span>
+              </span>
+
+                <span class="row">
+                <span class="col">
+                  <%= Clinic.human_attribute_name :corporate_name %>: <%= clinic.corporate_name %>
+                </span>
+              </span>
+
+                <span class="row">
+                <span class="col">
+                  <%= Clinic.human_attribute_name :cnpj %>: <%= clinic.cnpj %>
+                </span>
+              </span>
+
+                <span class="row">
+                <span class="col">
+                  <%= Clinic.human_attribute_name :health_insurance %>: <%= clinic.health_insurance %>
+                </span>
+              </span>
+
+                <span class="row">
+                <span class="col">
+                  <%= Clinic.human_attribute_name :specialties %>: <% clinic.specialties.each do |specialty| %> <%= specialty.description %> <% end %>
+                </span>
+              </span>
+
+                <span class="row">
+                <span class="col">
+                  <%= Clinic.human_attribute_name :addresses %>: <% clinic.addresses.each do |address| %> <%= address.city %> - <%= address.state %> <% end %>
+                </span>
+              </span>
+
+              </p>
+              <p class="card-text"><small class="text-muted">
+                <%= Clinic.human_attribute_name :updated_at %>: <%= clinic.updated_at.strftime("%d/%m/%Y - %H:%M") %>
+              </small></p>
+              <%= link_to "Exibir", clinic_path(clinic), class: "btn btn-secondary" %>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
-    </tbody>
-  </table>
+</div>
 
 <% else %>
   <p class="lead">

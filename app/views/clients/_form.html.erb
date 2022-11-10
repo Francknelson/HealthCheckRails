@@ -2,20 +2,33 @@
   form_url = client.persisted? ? client_path(client) : clients_path
 %>
 
-<p class="text-muted"><%= t "required_fields_html" %></p>
+<div class="row text-center">
+  <p class="text-muted"><%= t "required_fields_html" %></p>
+</div>
+
 
 <%= simple_form_for(client, url: form_url, local: true) do |f| %>
 
   <fieldset class="form-fields">
 
     <div class="form-floating mb-3">
-      <%= f.input_field :client_id,
+      <%= f.input_field :user_id,
                         as: :select,
-                        collection: @clients.map{ |c| %W[#{c.user.name} #{c.id}]},
+                        collection: @users.map{ |u| %W[#{u.name} #{u.id}]},
                         label: false,
-                        prompt: "Paciente",
+                        prompt: "Usuário",
                         class: "form-select" %>
-      <%= f.label :client_id %>
+      <%= f.label :user_id %>
+    </div>
+
+    <div class="form-floating mb-3">
+      <%= f.input_field :clinic_id,
+                        as: :select,
+                        collection: @clinics.map{ |c| %W[#{c.user.name} #{c.id}]},
+                        label: false,
+                        prompt: "Clínica",
+                        class: "form-select" %>
+      <%= f.label :clinic_id %>
     </div>
 
     <div class="form-floating mb-3">

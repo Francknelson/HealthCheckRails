@@ -2,7 +2,10 @@
   form_url = appointment.persisted? ? appointment_path(appointment) : appointments_path
 %>
 
-<p class="text-muted"><%= t "required_fields_html" %></p>
+<div class="row text-center">
+  <p class="text-muted"><%= t "required_fields_html" %></p>
+</div>
+
 
 <%= simple_form_for(appointment, url: form_url, local: true) do |f| %>
   <fieldset class="form-fields">

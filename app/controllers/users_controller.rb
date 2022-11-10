@@ -25,6 +25,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        @user.password = params[:user][:password]
+        @user.save
         format.html { redirect_to "/", notice: "Usuário cadastrado com sucesso!" }
         session[:user_id] = @user.id if @current_user.nil?
       else

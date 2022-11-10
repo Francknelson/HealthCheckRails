@@ -4,13 +4,6 @@ pt:
       user:
         one: Usuário
         other: Usuários
-    values:
-      user:
-        user_type:
-          admin: Administrador
-          'client': Paciente
-          'professional': Profissional
-          'clinic': Clínica
     attributes:
       user:
         name: Nome
@@ -26,3 +19,5 @@ pt:
         addresses: Endereços
         created_at: Cadastrado em
         updated_at: Atualizado em
+        user_types:
+          admin: Administrador

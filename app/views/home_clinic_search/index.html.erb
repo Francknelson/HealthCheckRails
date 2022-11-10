@@ -1,0 +1,73 @@
+<div class="row text-center">
+  <div class="col">
+    <h1><%= Clinic.model_name.human count: 2 %> </h1>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <h4>Encontre <%= Clinic.model_name.human count: 2 %>:</h4>
+  <%= form_tag(clinics_search_path, method: :get) do %>
+    <%= text_field_tag(:search, params[:search], size: 50, placeholder: "Nome, Razão social, Email, CNPJ, Plano de saúde ou Cidade") %>
+    <%= submit_tag("Buscar") %>
+    <%= link_to 'X', clinics_search_path, class:"btn", style:"color: red;" %>
+<% end %>
+</div>
+
+<div class="row">
+  <% if @clinics.any? %>
+    <% @clinics.each do |clinic| %>
+      <div class="card mb-3 mt-3 ms-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="https://cdn-icons-png.flaticon.com/512/3688/3688596.png" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title ">
+                  <%= clinic.user.name %> <%= clinic.user.last_name %>
+              </h5>
+              <p class="card-text">
+              <span class="row">
+                <span class="col">
+                  <%= Clinic.human_attribute_name :email %>: <%= clinic.user.email %>
+                </span>
+              </span>
+
+                <span class="row">
+                <span class="col">
+                  <%= Clinic.human_attribute_name :corporate_name %>: <%= clinic.corporate_name %>
+                </span>
+              </span>
+
+                <span class="row">
+                <span class="col">
+                  <%= Clinic.human_attribute_name :cnpj %>: <%= clinic.cnpj %>
+                </span>
+              </span>
+
+                <span class="row">
+                <span class="col">
+                  <%= Clinic.human_attribute_name :health_insurance %>: <%= clinic.health_insurance %>
+                </span>
+              </span>
+
+                <span class="row">
+                <span class="col">
+                  <%= Clinic.human_attribute_name :specialties %>: <% clinic.specialties.each do |specialty| %> <%= specialty.description %> <% end %>
+                </span>
+              </span>
+
+              </p>
+              <p class="card-text"><small class="text-muted">
+                <%= Clinic.human_attribute_name :updated_at %>: <%= clinic.updated_at.strftime("%d/%m/%Y - %H:%M") %>
+              </small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+</div>
+
+<% else %>
+  <p>Não temos nenhuma clínica cadastrada.</p>
+<% end %>

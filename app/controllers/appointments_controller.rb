@@ -6,7 +6,10 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments or /appointments.json
   def index
-    @appointments = Appointment.all
+    @appointments = Appointment.search(params[:search]) if @current_user.user_type == "admin"
+    @appointments = Appointment.where(clinic_id: @current_user.clinic.id).search(params[:search]) if @current_user.user_type == "clinic"
+    @appointments = Appointment.where(client_id: @current_user.client.id).search(params[:search]) if @current_user.user_type == "client"
+    @appointments = Appointment.where(professional_id: @current_user.professional.id).search(params[:search]) if @current_user.user_type == "professional"
   end
 
   # GET /appointments/1 or /appointments/1.json
@@ -28,7 +31,7 @@ class AppointmentsController < ApplicationController
 
     respond_to do |format|
       if @appointment.save
-        format.html { redirect_to appointment_url(@appointment), notice: "Doctors appointment was successfully created." }
+        format.html { redirect_to appointment_url(@appointment), notice: "Consulta cadastrada com sucesso!" }
         format.json { render :show, status: :created, location: @appointment }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +44,7 @@ class AppointmentsController < ApplicationController
   def update
     respond_to do |format|
       if @appointment.update(appointment_params)
-        format.html { redirect_to appointment_url(@appointment), notice: "Doctors appointment was successfully updated." }
+        format.html { redirect_to appointment_url(@appointment), notice: "Consulta atualizada com sucesso!" }
         format.json { render :show, status: :ok, location: @appointment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,7 +58,7 @@ class AppointmentsController < ApplicationController
     @appointment.destroy
 
     respond_to do |format|
-      format.html { redirect_to appointments_url, notice: "Doctors appointment was successfully destroyed." }
+      format.html { redirect_to appointments_url, notice: "Consulta excluída com sucesso!" }
       format.json { head :no_content }
     end
   end

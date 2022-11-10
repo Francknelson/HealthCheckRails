@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   post '/signin' => 'sessions#create'
   delete '/signout' => 'sessions#destroy'
 
+  get '/clinics_search' => 'home_clinic_search#index'
+  get '/professionals_search' => 'home_professional_search#index'
+
   resources :users do
     resources :addresses
   end

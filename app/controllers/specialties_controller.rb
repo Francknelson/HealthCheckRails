@@ -3,7 +3,7 @@ class SpecialtiesController < ApplicationController
 
   # GET /specialties or /specialties.json
   def index
-    @specialties = Specialty.all
+    @specialties = Specialty.search(params[:search])
   end
 
   # GET /specialties/1 or /specialties/1.json

@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def create
     @person = User.authenticate(params[:session][:email], params[:session][:password])
-    if @person
+    if @person.present?
       session[:user_id] = @person.id
       respond_to do |format|
         format.html { redirect_to "/", notice: "Você está logado." }

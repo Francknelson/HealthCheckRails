@@ -28,9 +28,11 @@ class ClinicsController < ApplicationController
 
     respond_to do |format|
       if @clinic.save
-        @clinic.user.user_type = "clinic" if @clinic.user.user_type.nil?
-        format.html { redirect_to clinic_url(@clinic), notice: "Clínica criada com sucesso!" }
-        format.json { render :show, status: :created, location: @clinic }
+        if @clinic.user.user_type.nil?
+          @clinic.user.update(user_type: "clinic")
+        end
+        format.html { redirect_to clinics_url, notice: "Clínica criada com sucesso!" }
+        format.json { render :index, status: :created, location: @clinic }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @clinic.errors, status: :unprocessable_entity }
@@ -53,6 +55,7 @@ class ClinicsController < ApplicationController
 
   # DELETE /clinics/1 or /clinics/1.json
   def destroy
+    @clinic.user.update(user_type: nil)
     @clinic.destroy
 
     respond_to do |format|
@@ -73,7 +76,7 @@ class ClinicsController < ApplicationController
   end
 
   def set_users
-    @users = User.all
+    @users = User.where(user_type: nil)
   end
 
   # Only allow a list of trusted parameters through.

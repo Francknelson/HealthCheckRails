@@ -6,7 +6,8 @@ class ProfessionalsController < ApplicationController
 
   # GET /professionals or /professionals.json
   def index
-    @professionals = Professional.search(params[:search])
+    @professionals = Professional.where(clinic_id: @current_user.clinic.id).search(params[:search]) if @current_user.user_type == "clinic"
+    @professionals = Professional.search(params[:search]) if @current_user.user_type == "admin"
   end
 
   # GET /professionals/1 or /professionals/1.json
@@ -28,9 +29,12 @@ class ProfessionalsController < ApplicationController
 
     respond_to do |format|
       if @professional.save
+        if @professional.user.user_type.nil?
+          @professional.user.update(user_type: "professional")
+        end
         @professional.user.user_type = "professional" if @professional.user.user_type.nil?
-        format.html { redirect_to professional_url(@professional), notice: "Profissional criado com sucesso!" }
-        format.json { render :show, status: :created, location: @professional }
+        format.html { redirect_to professionals_url, notice: "Profissional criado com sucesso!" }
+        format.json { render :index, status: :created, location: @professional }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @professional.errors, status: :unprocessable_entity }
@@ -53,6 +57,7 @@ class ProfessionalsController < ApplicationController
 
   # DELETE /professionals/1 or /professionals/1.json
   def destroy
+    @professional.user.update(user_type: nil)
     @professional.destroy
 
     respond_to do |format|
@@ -68,7 +73,7 @@ class ProfessionalsController < ApplicationController
   end
 
   def set_users
-    @users = User.all
+    @users = User.where(user_type: nil)
   end
 
   def set_specialties

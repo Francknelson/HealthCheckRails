@@ -15,7 +15,7 @@ class Professional < ApplicationRecord
 
   def self.search(search)
     if search
-      joins(:user).where('users.name ILIKE ? OR users.email ILIKE ? OR cnpj ILIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
+      left_outer_joins(:user, :addresses, :specialties).where('users.name ILIKE :term OR users.email ILIKE :term OR cnpj ILIKE :term OR addresses.city ILIKE :term OR specialties.description ILIKE :term', term: "%#{search}%")
     else
       all
     end

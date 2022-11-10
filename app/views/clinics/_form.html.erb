@@ -2,7 +2,9 @@
   form_url = clinic.persisted? ? clinic_path(clinic) : clinics_path
 %>
 
-<p class="text-muted"><%= t "required_fields_html" %></p>
+<div class="row text-center">
+  <p class="text-muted"><%= t "required_fields_html" %></p>
+</div>
 
 <%= simple_form_for(clinic, url: form_url, local: true) do |f| %>
 

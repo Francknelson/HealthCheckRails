@@ -25,7 +25,7 @@ class AddressesController < ApplicationController
 
     respond_to do |format|
       if @address.save
-        format.html { redirect_to user_addresses_path(@current_user), notice: "Address was successfully created." }
+        format.html { redirect_to user_addresses_path(@current_user), notice: "Endereço criado com sucesso!" }
         format.json { render :show, status: :created, location: @address }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class AddressesController < ApplicationController
   def update
     respond_to do |format|
       if @address.update(address_params)
-        format.html { redirect_to user_address_url(@current_user), notice: "Address was successfully updated." }
+        format.html { redirect_to user_address_url(@current_user), notice: "Endereço atualizado com sucesso!" }
         format.json { render :show, status: :ok, location: @address }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class AddressesController < ApplicationController
     @address.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_addresses_url(@current_user), notice: "Address was successfully destroyed." }
+      format.html { redirect_to user_addresses_url(@current_user), notice: "Endereço excluído com sucesso!" }
       format.json { head :no_content }
     end
   end
