@@ -1,0 +1,18 @@
+pt:
+  activerecord:
+    models:
+      address:
+        one: Endereço
+        other: Endereços
+    attributes:
+      address:
+        street: Rua
+        number: Número
+        complement: Complemento
+        neighborhood: Bairro
+        city: Cidade
+        state: Estado
+        country: País
+        zipcode: CEP
+        created_at: Cadastrado em
+        updated_at: Atualizado em

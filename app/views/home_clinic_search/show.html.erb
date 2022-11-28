@@ -1,0 +1,28 @@
+<h1 class="text-center"><%= Clinic.model_name.human %></h1>
+
+<div class="row">
+  <div class="col-3"><%= Clinic.human_attribute_name :corporate_name %></div>
+  <div class="col-9"><%= @clinic.corporate_name %></div>
+  <div class="col-3"><%= Clinic.human_attribute_name :cnpj %></div>
+  <div class="col-9"><%= @clinic.cnpj %></div>
+  <div class="col-3"><%= Clinic.human_attribute_name :health_insurance %></div>
+  <div class="col-9"><%= @clinic.health_insurance %></div>
+  <div class="col-3"><%= Clinic.human_attribute_name :specialties %></div>
+  <div class="col-9">
+    <% @clinic.specialties.each do |specialty| %>
+      <%= specialty.description %>
+    <% end %>
+  </div>
+  <div class="col-3"><%= Clinic.human_attribute_name :addresses %></div>
+  <div class="col-9">
+    <% @clinic.addresses.each do |address| %>
+      <%= render "clinic_location", address: address, clinic: @clinic %>
+    <% end %>
+  </div>
+  <div class="col-3"><%= Clinic.human_attribute_name :professionals %></div>
+  <div class="col-9">
+    <% @clinic.professionals.each do |professional| %>
+      <%= professional.user.name %> <%= professional.user.last_name %>
+    <% end %>
+  </div>
+</div>

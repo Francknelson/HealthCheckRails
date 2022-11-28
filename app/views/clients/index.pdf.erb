@@ -1,0 +1,16 @@
+<h1 class="text-center">Relatorio de Pacientes</h1>
+
+<h3>Total de Pacientes: <%= @clients.count %></h3>
+
+<hr>
+<% @clients.each do |client| %>
+  <p>Clinica: <%= client.clinic.corporate_name %></p>
+  <p>Nome: <%= client.user.name %> <%= client.user.last_name %></p>
+  <p>Email: <%= client.user.email %></p>
+  <p>Telefone: <%= client.user.phone %></p>
+  <p>Tipo de usuario: <%= client.user.user_type %></p>
+  <p>CPF: <%= client.cpf %></p>
+  <p>RG: <%= client.rg %></p>
+  <p>Data de nascimento: <%= client.birth_date %></p>
+  <hr>
+<% end %>

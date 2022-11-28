@@ -1,0 +1,19 @@
+<h1 class="text-center">Relatorio de Medicos</h1>
+
+<h3>Total de Medicos: <%= @professionals.count %></h3>
+
+<hr>
+<% @professionals.each do |professional| %>
+  <p>Clinica: <%= professional.clinic.corporate_name %></p>
+  <p>Nome: <%= professional.user.name %> <%= professional.user.last_name %></p>
+  <p>Email: <%= professional.user.email %></p>
+  <p>Telefone: <%= professional.user.phone %></p>
+  <p>CNPJ: <%= professional.cnpj %></p>
+  <p>Registro Profissional: <%= professional.professional_record %></p>
+  <p>Especialidades:
+    <% professional.specialties.each do |specialty| %>
+      <%= specialty.description %>
+    <% end %>
+  </p>
+  <hr>
+<% end %>

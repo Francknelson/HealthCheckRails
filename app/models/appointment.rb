@@ -4,6 +4,7 @@ class Appointment < ApplicationRecord
             :status,
             :professional_id,
             :clinic_id,
+            :client_id,
             presence: true
 
   belongs_to :professional

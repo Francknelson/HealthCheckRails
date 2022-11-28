@@ -1,0 +1,15 @@
+<h1 class="text-center">Relatorio de Usuarios</h1>
+
+<h3>Total de Usuarios: <%= @users.count %></h3>
+<h3>Total de Clinicas: <%= @users.where(user_type: "clinic").count %></h3>
+<h3>Total de Medicos: <%= @users.where(user_type: "professional").count %></h3>
+<h3>Total de Pacientes: <%= @users.where(user_type: "client").count %></h3>
+
+<hr>
+<% @users.each do |user| %>
+  <p>Nome: <%= user.name %> <%= user.last_name %></p>
+  <p>Email: <%= user.email %></p>
+  <p>Telefone: <%= user.phone %></p>
+  <p>Tipoe de Usuario: <%= user.user_type %></p>
+  <hr>
+<% end %>

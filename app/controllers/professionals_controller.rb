@@ -8,6 +8,19 @@ class ProfessionalsController < ApplicationController
   def index
     @professionals = Professional.where(clinic_id: @current_user.clinic.id).search(params[:search]) if @current_user.user_type == "clinic"
     @professionals = Professional.search(params[:search]) if @current_user.user_type == "admin"
+
+    respond_to do |format|
+      format.html
+      if @current_user.admin?
+        format.pdf { render pdf: "articles-list-report",
+                            footer: { center: "[page] of [topage]" }
+        }
+      end
+      format.pdf { render pdf: "articles-list-report",
+                          header: {center: "#{@current_user.clinic.corporate_name}"},
+                          footer: { center: "[page] of [topage]" }
+      }
+    end
   end
 
   # GET /professionals/1 or /professionals/1.json

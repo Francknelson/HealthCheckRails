@@ -4,6 +4,14 @@ class UsersController < ApplicationController
   # GET /people or /people.json
   def index
     @users = User.search(params[:search])
+
+    respond_to do |format|
+      format.html
+
+      format.pdf { render pdf: "articles-list-report",
+                          footer: { center: "[page] of [topage]" }
+      }
+    end
   end
 
   # GET /people/1 or /people/1.json

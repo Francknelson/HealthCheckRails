@@ -7,7 +7,7 @@ class Client < ApplicationRecord
   belongs_to :user
   belongs_to :clinic
 
-  has_many :addresses, through: :user
+  has_many :addresses, through: :user, dependent: :destroy
   has_many :appointments, dependent: :restrict_with_error
 
   def self.search(search)

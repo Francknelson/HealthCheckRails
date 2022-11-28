@@ -10,6 +10,19 @@ class AppointmentsController < ApplicationController
     @appointments = Appointment.where(clinic_id: @current_user.clinic.id).search(params[:search]) if @current_user.user_type == "clinic"
     @appointments = Appointment.where(client_id: @current_user.client.id).search(params[:search]) if @current_user.user_type == "client"
     @appointments = Appointment.where(professional_id: @current_user.professional.id).search(params[:search]) if @current_user.user_type == "professional"
+
+    respond_to do |format|
+      format.html
+      if @current_user.admin?
+        format.pdf { render pdf: "articles-list-report",
+                            footer: { center: "[page] of [topage]" }
+        }
+      end
+      format.pdf { render pdf: "articles-list-report",
+                          header: {center: "#{@current_user.clinic.corporate_name}"},
+                          footer: { center: "[page] of [topage]" }
+      }
+    end
   end
 
   # GET /appointments/1 or /appointments/1.json

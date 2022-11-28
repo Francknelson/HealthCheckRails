@@ -7,6 +7,15 @@ class ClinicsController < ApplicationController
   # GET /clinics or /clinics.json
   def index
     @clinics = Clinic.search(params[:search])
+
+    respond_to do |format|
+      format.html
+
+      format.pdf { render pdf: "articles-list-report",
+                          footer: { center: "[page] of [topage]" }
+      }
+
+    end
   end
 
   # GET /clinics/1 or /clinics/1.json

@@ -1,0 +1,7 @@
+pt:
+  addresses:
+    index:
+      addresses_count_html:
+        zero: Não temos endereços cadastrados.
+        one: "Hoje temos <b>%{count}</b> endereço cadastrado."
+        other: "Hoje temos <b>%{count}</b> endereço cadastrados."

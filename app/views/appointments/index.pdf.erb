@@ -1,0 +1,14 @@
+<h1 class="text-center">Relatorio de Consultas</h1>
+
+<h3>Total de consultas: <%= @appointments.count %></h3>
+<h3>Total de consultas concluidas: <%= @appointments.where(status: "Concluída").count %></h3>
+<h3>Total de consultas pendentes: <%= @appointments.where(status: "Pendente").count %></h3>
+<h3>Total de consultas canceladas: <%= @appointments.where(status: "Cancelada").count %></h3>
+<hr>
+<% @appointments.each do |appointment| %>
+  <p>Clinica: <%= appointment.clinic.corporate_name %></p>
+  <p>Medico: <%= appointment.professional.user.name %> <%= appointment.professional.user.last_name %></p>
+  <p>Data da consulta: <%= appointment.appointment_date %></p>
+  <p>Status: <%= appointment.status %></p>
+  <hr>
+<% end %>

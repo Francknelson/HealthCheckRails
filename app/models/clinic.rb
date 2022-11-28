@@ -1,10 +1,11 @@
 class Clinic < ApplicationRecord
-  validates :corporate_name, presence: true
-  validates :cnpj, presence: true
+  validates :corporate_name,
+            :cnpj,
+            presence: true
 
   belongs_to :user
 
-  has_many :addresses, through: :user
+  has_many :addresses, through: :user, dependent: :destroy
   has_many :appointments, dependent: :restrict_with_error
   has_many :professionals, dependent: :restrict_with_error
   has_many :clinic_specialties, inverse_of: :clinic, dependent: :destroy

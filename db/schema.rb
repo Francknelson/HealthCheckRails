@@ -45,7 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_212323) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "clinic_id"
+    t.integer "clinic_id", null: false
   end
 
   create_table "clinic_specialties", force: :cascade do |t|

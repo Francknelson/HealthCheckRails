@@ -6,7 +6,21 @@ class ClientsController < ApplicationController
   # GET /clients or /clients.json
   def index
     @clients = Client.search(params[:search]) if @current_user.admin?
-    @clients = Client.where(clinic_id: @current_user.professional.clinic.id).search(params[:search]) if @current_user.professional? || @current_user.clinic?
+    @clients = Client.where(clinic_id: @current_user.professional.clinic.id).search(params[:search]) if @current_user.professional?
+    @clients = Client.where(clinic_id: @current_user.clinic.id).search(params[:search]) if @current_user.clinic?
+
+    respond_to do |format|
+      format.html
+      if @current_user.admin?
+        format.pdf { render pdf: "articles-list-report",
+                            footer: { center: "[page] of [topage]" }
+        }
+      end
+      format.pdf { render pdf: "articles-list-report",
+                          header: {center: "#{@current_user.clinic.corporate_name}"},
+                          footer: { center: "[page] of [topage]" }
+      }
+    end
   end
 
   # GET /clients/1 or /clients/1.json

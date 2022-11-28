@@ -1,0 +1,11 @@
+<address>
+  <%= [address.street, address.number].reject(&:blank?).join(", ") %> <br/>
+
+  <% if address.complement.present? %>
+    <%= address.complement %> <br/>
+  <% end %>
+
+  <%= [address.neighborhood, address.zipcode].reject(&:blank?).join(" - ") %> <br/>
+
+  <%= [address.city, address.state].join(" - ") %> <br/>
+</address>

@@ -31,6 +31,8 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'simple_form'
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -41,6 +43,10 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
+  gem 'rspec-rails', '~> 6.0.0'
+  gem 'factory_bot_rails'
+  gem 'faker', '~> 1.6', '>= 1.6.6'
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 group :development do
@@ -49,6 +55,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '~> 4.0.0'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

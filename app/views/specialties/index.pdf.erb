@@ -1,0 +1,9 @@
+<h1 class="text-center">Relatorio de Especialidades</h1>
+
+<h3>Total de Especialidades: <%= @specialties.count %></h3>
+
+<hr>
+<% @specialties.each do |specialty| %>
+  <p>Descricao: <%= specialty.description %></p>
+  <hr>
+<% end %>

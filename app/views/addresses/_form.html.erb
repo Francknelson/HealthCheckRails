@@ -2,7 +2,9 @@
   form_url = address.persisted? ? user_address_path(@current_user, address) : user_addresses_path(@current_user)
 %>
 
-<p class="text-muted"><%= t "required_fields_html" %></p>
+<div class="row text-center">
+  <p class="text-muted"><%= t "required_fields_html" %></p>
+</div>
 
 <%= simple_form_for(address, url: form_url, local: true) do |f| %>
 

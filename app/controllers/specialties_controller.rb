@@ -4,6 +4,14 @@ class SpecialtiesController < ApplicationController
   # GET /specialties or /specialties.json
   def index
     @specialties = Specialty.search(params[:search])
+
+    respond_to do |format|
+      format.html
+
+      format.pdf { render pdf: "articles-list-report",
+                          footer: { center: "[page] of [topage]" }
+      }
+    end
   end
 
   # GET /specialties/1 or /specialties/1.json

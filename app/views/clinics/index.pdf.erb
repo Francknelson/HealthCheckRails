@@ -1,0 +1,16 @@
+<h1 class="text-center">Relatorio de Clinicas</h1>
+
+<h3>Total de Clinicas: <%= @clinics.count %></h3>
+
+<hr>
+<% @clinics.each do |clinic| %>
+  <p>Clinica: <%= clinic.corporate_name %></p>
+  <p>CNPJ: <%= clinic.cnpj %></p>
+  <p>Convenio: <%= clinic.health_insurance %></p>
+  <p>Especialidades:
+    <% clinic.specialties.each do |specialty| %>
+      <%= specialty.description %>
+    <% end %>
+  </p>
+  <hr>
+<% end %>
