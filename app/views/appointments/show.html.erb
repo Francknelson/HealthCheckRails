@@ -17,8 +17,9 @@
 
 <div class="page-actions">
   <%= link_to "Editar", edit_appointment_path(@appointment), class: "btn btn-primary" %>
-  <% if @appointment.status != "Cancelada" %>
+  <% if @appointment.status != "Cancelada" && @appointment.status != "Concluída" %>
     <%= link_to "Cancelar", appointment_cancel_path(@appointment), class: "btn btn-danger", method: :get %>
+    <%= link_to "Concluir", appointment_confirm_path(@appointment), class: "btn btn-success", method: :get %>
   <% end %>
   <%= link_to "Voltar", appointments_path, class: "btn btn-secondary" %>
 </div>

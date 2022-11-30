@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/reports' => 'reports#index'
   get '/appointments_report' => 'appointments#index'
 
+
   resources :users do
     resources :addresses
   end
@@ -25,5 +26,6 @@ Rails.application.routes.draw do
   resources :professionals
   resources :appointments do
     get '/cancel' => 'appointments#cancel'
+    get '/confirm' => 'appointments#completed'
   end
 end
